@@ -1,10 +1,4 @@
 *~
 WEB-INF/
-begin.jsp
 blockingError.jsp
-dataCategories.jsp
-footer.jsp
 headMenu.jsp
-htmlHead.jsp
-log4j.properties
-report.jsp
