@@ -281,7 +281,6 @@ html, body {
 }
 
 #search-bochs div.inner span.ugly-hack {
-    float: left;
     width: 82px;
 }
 
