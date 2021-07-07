@@ -15,7 +15,7 @@ if (errorMessage==null) {
     out.print("<h2>errorMessage is null!</h2>");
     return;
 } else if (errorMessage.length()>0) {
-    out.print("<h2>"+errorMessage+"</h2>");
+    out.print("<code>"+errorMessage+"</code>");
     return;
 }
 
@@ -45,6 +45,7 @@ for (int i=0; i<sampleCounts.length; i++) {
  var expressionJSON = ${expressionJSON};
  var sourcesJSON = ${sourcesJSON};
  var descriptionsJSON = ${descriptionsJSON};
+ var namesJSON = ${namesJSON};
  var geneCounts = ${geneCounts};
  var sampleCounts = ${sampleCounts};
  
@@ -110,6 +111,7 @@ for (int i=0; i<sampleCounts.length; i++) {
      var source = sourcesJSON[index];
      var data = expressionJSON[index];
      var descriptions = descriptionsJSON[index];
+     var names = namesJSON[index];
      var samplesKmeaned = (geneCounts[index]>=min_cluster);
      var variablesKmeaned = (sampleCounts[index]>=min_cluster);
      // update the blurbs
@@ -131,12 +133,19 @@ for (int i=0; i<sampleCounts.length; i++) {
      // the CanvasXpress event handlers
      // window.open("/${WEB_PROPERTIES['webapp.path']}/loadQuery.do?skipBuilder=true&query="+encodedQuery+"%0A++++++++++++&trail=|query&method=xml");
      var evts = {
-	 "click": function(o, e, t) {
-             var gene = o.y.smps[0];
-             var sample = o.y.vars[0];
-             var s = descriptions[sample];
-             t.showInfoSpan(e, s);
-	 }
+	 "mousemove": function(o, e, t) {
+             if (o.y.vars.length==1) {
+                 var sample = o.y.vars[0];
+                 var s = names[sample] + ":" + descriptions[sample];
+                 t.showInfoSpan(e, s);
+             }
+	 },
+         "mouseout": function(o, e, t) {
+         },
+         "click": function(o, e, t) {
+         },
+         "dblclick": function(o, e, t) {
+         }
      }
      // create/update the CanvasXpress object
      var cx = CanvasXpress.$('canvasx');
