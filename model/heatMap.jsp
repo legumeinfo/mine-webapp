@@ -131,18 +131,33 @@ for (int i=0; i<sampleCounts.length; i++) {
          document.getElementById('sampleClusteringBlurb').innerHTML = 'Sample clustering is not available for fewer than '+min_cluster+' samples.';
      }
      // the CanvasXpress event handlers
-     // window.open("/${WEB_PROPERTIES['webapp.path']}/loadQuery.do?skipBuilder=true&query="+encodedQuery+"%0A++++++++++++&trail=|query&method=xml");
+     // 
+     // NOTE: do not put comments inside functions!
+     // NOTE: gene click link requires that class_keys.properties has Gene_URI=secondaryIdentifier
+     // Example: window.open("/medicmine/gene:Medtr0002s0420");
      var evts = {
 	 "mousemove": function(o, e, t) {
-             if (o.y.vars.length==1) {
+             if (o.y.vars.length==1 && o.y.smps.length==1) {
+                 var value = o.y.data[0][0]+" "+source.unit;
+                 t.showInfoSpan(e, value);
+             } else if (o.y.vars.length==1) {
                  var sample = o.y.vars[0];
                  var s = names[sample] + ":" + descriptions[sample];
                  t.showInfoSpan(e, s);
+             } else if (o.y.smps.length==1) {
+                 var gene = o.y.smps[0];
+                 var url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+gene;
+                 t.showInfoSpan(e, "go to "+gene+" gene page");
              }
 	 },
          "mouseout": function(o, e, t) {
          },
          "click": function(o, e, t) {
+             if (o.y.smps.length==1) {
+                 var gene = o.y.smps[0];
+                 var url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+gene;
+                 window.open(url);
+             }
          },
          "dblclick": function(o, e, t) {
          }

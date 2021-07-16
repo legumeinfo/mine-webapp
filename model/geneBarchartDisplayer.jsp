@@ -17,6 +17,9 @@
     <script type="text/javascript">
      var sourceJSON = ${sourceJSON};
      var descriptionsJSON${index} = ${descriptionsList[index]};
+     var unit = "${unitsList[index]}";
+
+     // link the expression source
      document.getElementById('sourceIdentifier${index}').innerHTML = '<a href="report.do?id='+sourceJSON.id+'">'+sourceJSON.identifier+'</a>';
 
      // the data for this source
@@ -28,27 +31,22 @@
          "graphOrientation": "vertical",
          "marginTop": 100,
          "axisMinMaxTickTickWidth": false,
-         "axisTickScaleFontFactor": 3,
-         "axisTitleScaleFontFactor": 3.0,
+         "axisTickScaleFontFactor": 1,
+         "axisTitleScaleFontFactor": 1.0,
          "smpLabelRotate": 45,
          "smpTitleFontStyle": "italic",
-         "smpTitleScaleFontFactor": 0.75,
-         "smpTitle": "Mouse over sample for description",
-         "xAxisTitle": "TPM",
+         "smpTitleScaleFontFactor": 0.5,
+         "smpTitle": "Mouse over bar for full sample description",
+         "xAxisTitle": unit,
          "showLegend": false
      }
 
      // the CanvasXpress event handlers
      var evts = {
-         mousemove: function(o,e,t) {
+         mousemove: function(o, e, t) {
              var sample = o.y.smps;
-             var s = descriptionsJSON${index}[sample];
-             t.showInfoSpan(e,s);
-         },
-         click: function(o,e,t) {
-             var sample = o.y.smps;
-             var s = descriptionsJSON${index}[sample];
-             t.showInfoSpan(e,s);
+             var s = sample+":"+descriptionsJSON${index}[sample];
+             t.showInfoSpan(e, s);
          }
      }
     </script>
