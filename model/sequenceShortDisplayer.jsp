@@ -5,3 +5,6 @@
 <c:if test="${!empty WEB_PROPERTIES['sequenceserver.url']}">
     <jsp:include page="sequenceServerBlastButton.jsp"/>
 </c:if>
+<c:if test="${!empty WEB_PROPERTIES['funnotate.url']}">
+    <jsp:include page="funnotateButton.jsp"/>
+</c:if>
