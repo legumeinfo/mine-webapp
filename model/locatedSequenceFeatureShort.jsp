@@ -18,8 +18,8 @@ if ((o instanceof ReportObject &&
     <c:if test="${!empty WEB_PROPERTIES['sequenceserver.url']}">
         <jsp:include page="sequenceServerBlastButton.jsp"/>
     </c:if>
-    <c:if test="${!empty WEB_PROPERTIES['funnotate.url']}">
-        <jsp:include page="funnotateButton.jsp"/>
+    <c:if test="${!empty WEB_PROPERTIES['annotate.url']}">
+        <jsp:include page="annotateButton.jsp"/>
     </c:if>
 <% } %>
 <!-- /locatedSequenceFeatureShort.jsp -->

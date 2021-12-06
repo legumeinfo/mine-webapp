@@ -2,9 +2,3 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html:xhtml/>
 <html:link action="sequenceExporter?object=${object.id}" target="_new"><html:img styleClass="fasta" src="model/images/fasta.gif" title="FASTA" /></html:link>
-<c:if test="${!empty WEB_PROPERTIES['sequenceserver.url']}">
-    <jsp:include page="sequenceServerBlastButton.jsp"/>
-</c:if>
-<c:if test="${!empty WEB_PROPERTIES['funnotate.url']}">
-    <jsp:include page="funnotateButton.jsp"/>
-</c:if>
