@@ -11,7 +11,7 @@
 // request data from GWASCircle
 List<String> markerList = (List<String>) request.getAttribute("markerList");
 List<String> chromosomeList = (List<String>) request.getAttribute("chromosomeList");
-List<String> phenotypeList = (List<String>) request.getAttribute("phenotypeList");
+List<String> traitList = (List<String>) request.getAttribute("traitList");
 List<Double> positionList = (List<Double>) request.getAttribute("positionList");
 List<Double> log10pList = (List<Double>) request.getAttribute("log10pList");
 // create quoted lists for Javascript below
@@ -25,10 +25,10 @@ for (String chromosome : chromosomeList) {
     if (chromosomeString.length()>0) chromosomeString += ",";
     chromosomeString += "\""+chromosome+"\"";
 }
-String phenotypeString = "";
-for (String phenotype : phenotypeList) {
-    if (phenotypeString.length()>0) phenotypeString += ",";
-    phenotypeString += "\""+phenotype+"\"";
+String traitString = "";
+for (String trait : traitList) {
+    if (traitString.length()>0) traitString += ",";
+    traitString += "\""+trait+"\"";
 }
 %>
 
@@ -36,7 +36,7 @@ for (String phenotype : phenotypeList) {
      var chromosome = [<%=chromosomeString%>];
      </div>
      <div>
-     var phenotype = [<%=phenotypeString%>];
+     var trait = [<%=traitString%>];
      </div>
      <div>
      var marker = [<%=markerString%>];
@@ -60,7 +60,7 @@ for (String phenotype : phenotypeList) {
      // }
      
      var chromosome = [<%=chromosomeString%>];
-     var phenotype = [<%=phenotypeString%>];
+     var trait = [<%=traitString%>];
      var marker = [<%=markerString%>];
      var position = <%=positionList%>;
      var value = <%=log10pList%>;
@@ -68,7 +68,7 @@ for (String phenotype : phenotypeList) {
      var data = {
          "x" : {
              "chromosome" : chromosome,
-             "phenotype" : phenotype
+             "trait" : trait
          },
          "y" : {
              "vars" : ["Position", "Value"],
@@ -88,7 +88,7 @@ for (String phenotype : phenotypeList) {
          rAxisZero: true,
          segregateSamplesBy : ["chromosome"],
          segregateVariablesBy : ["ring"],
-         smpOverlays : [<%=phenotypeString%>]
+         smpOverlays : [<%=traitString%>]
      }
 
      var cX = new CanvasXpress("canvasx", data, config);

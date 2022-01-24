@@ -31,7 +31,7 @@ try {
     PathQuery qtlQuery = new PathQuery(im.getModel());
     qtlQuery.addViews(
         "GeneticMarker.qtls.identifier",
-        "GeneticMarker.qtls.phenotype.primaryIdentifier"
+        "GeneticMarker.qtls.trait.primaryIdentifier"
     );
     qtlQuery.addConstraint(Constraints.eq("GeneticMarker.primaryIdentifier", markerName));
     qtlQuery.addOrderBy("GeneticMarker.qtls.identifier", OrderDirection.ASC);
