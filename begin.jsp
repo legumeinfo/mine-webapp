@@ -104,7 +104,7 @@
                     <div class="bottom">
                         <c:choose>
                             <c:when test="${!isNewUser && !empty (WEB_PROPERTIES['begin.thirdBox.visitedLink'])}">
-                                <div style="margin-left:14px;height:70px;width:250px;text-align:center;background-color:lightgray;border:2px solid gray;font-size:80%;">
+                                <div style="margin-left:14px;padding:10px;width:250px;text-align:center;background-color:lightgray;border:2px solid gray;font-size:80%;">
                                     <a href="<c:out value="${WEB_PROPERTIES['begin.thirdBox.visitedLink']}" />" >
                                         <c:out value="${WEB_PROPERTIES['begin.thirdBox.visitedLinkTitle']}" />
                                     </a>
