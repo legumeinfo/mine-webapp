@@ -2,16 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page import="java.net.URLEncoder" language="java" %>
-
 <!-- linkageGroupDiagram.jsp -->
 <html:xhtml />
-
 <tiles:importAttribute />
-
-<div id="linkage-group-displayer" style="display:block">
-    <canvas id="canvasID" width="${WEB_PROPERTIES['linkageGroupDiagram.width']}"></canvas>
-</div>
-
+<c:set var="width" value="${WEB_PROPERTIES['linkageGroupDiagram.width']}"/>
+<c:set var="height" value="${WEB_PROPERTIES['linkageGroupDiagram.height']}"/>
 <script type="text/javascript">
  var cx = new CanvasXpress("canvasID",
                            ${tracksJSON}, 
@@ -41,4 +36,6 @@
      
  );
 </script>
+<canvas id="canvasID" width="${width}" height="${height}"></canvas>
+<br clear="all"/>
 <!-- /linkageGroupDiagram.jsp -->
