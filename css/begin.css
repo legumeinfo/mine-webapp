@@ -78,6 +78,16 @@ html ul.tabs li.active, html ul.tabs li.active a:hover { /*--Makes sure that the
     border-top: 1px solid #9E68AE;
 }
 
+.thirdBox-bottom {
+    margin-left: 14px;
+    padding: 10px;
+    width: 233px;
+    text-align: center;
+    background-color: lightgray;
+    border: 2px solid gray;
+    font-size:80%;
+}
+
 /* page columns */
 #left.column, #right.column {
     float: left;
@@ -219,7 +229,6 @@ html, body {
     float: left;
     margin-right: 46px;
     position: relative;
-    background: url('../themes/purple/homepage/main-bochs-transparent-gradient.png') no-repeat top;
     padding: 0 6px;
 }
 
@@ -228,9 +237,9 @@ html, body {
 }
 
 #boxes div.inner {
-    background: #FFF;
+    background: lightgray;
     min-height: 210px;
-    border-bottom: 1px solid #dfdfdf;
+    border-bottom: 1px solid darkgray;
     padding-bottom: 60px;
 }
 
@@ -242,7 +251,7 @@ html, body {
 }
 
 #boxes div.inner h3 {
-    color: #FFF;
+    color: white;
     font-family: "Myriad Pro", Arial, Garuda, Helvetica, Tahoma, sans-serif;
     padding: 4px 0 4px 80px;
     font-size: 24px;
@@ -258,8 +267,8 @@ html, body {
 }
 
 #welcome-bochs div.inner h3 {
-    background: #c3c3c3;
-    color: #535353;
+    background: darkgray;
+    color: white;
     padding-left: 10px;
 }
 
@@ -749,7 +758,7 @@ html, body {
 }
 
 #bottom-wrap {
-    background: url("../themes/purple/homepage/content-grad-bottom.png") repeat-x bottom;
+    font-size: 80%;
     padding: 0 18px 25px 18px;
     margin-top: 10px !important;
 }
@@ -814,3 +823,4 @@ html, body {
 #api-langs li {
     float: left;
 }
+

@@ -8,22 +8,22 @@
 <c:set var="width" value="${WEB_PROPERTIES['gwasDisplayer.width']}"/>
 <c:set var="height" value="${WEB_PROPERTIES['gwasDisplayer.height']}"/>
 <%
-// get JSON from GWASDisplayer.java
-String genomesJSON = (String) request.getAttribute("genomesJSON");
+// for stacking plots per genome
+List<String> genomes = (List<String>) request.getAttribute("genomes");
 %>
 <script type="text/javascript">
- var genomesMap = <%=genomesJSON%>;
+ var genomesMap = ${genomesJSON};
  var genomes = Object.keys(genomesMap);
 
  // populate selector
- var selector = document.getElementById('genome-selector');
- var option;
- for (var i=0; i<genomes.length; i++) {
-     option = document.createElement('option');
-     option.text = genomes[i];
-     option.value = genomes[i];
-     selector.add(option);
- }
+ // var selector = document.getElementById('genome-selector');
+ // var option;
+ // for (var i=0; i<genomes.length; i++) {
+ //     option = document.createElement('option');
+ //     option.text = genomes[i];
+ //     option.value = genomes[i];
+ //     selector.add(option);
+ // }
 
  // static conf
  var conf = {
@@ -37,8 +37,10 @@ String genomesJSON = (String) request.getAttribute("genomesJSON");
      "manhattanMarkerLogPValue": "-log10(p)",
      "manhattanMarkerPosition": "Pos",
      "scatterType": "manhattan",
-     "title": "Slide window with mouse; change scale with mouse wheel over axis; select region to zoom in; click marker to see its page.",
-     "titleScaleFontFactor": 0.1,
+     "subtitle": "Slide window with mouse; change scale with mouse wheel over axis; resize plot by dragging edges; select region to zoom in; click marker to see its page.",
+     "titleScaleFontFactor": 0.3,
+     "subtitleScaleFontFactor": 0.2,
+     "axisTitleScaleFontFactor": 2.0,
      "disableToolbar": true,
      "colorBy": "Trait",
      "colorByShowLegend": true,
@@ -47,14 +49,15 @@ String genomesJSON = (String) request.getAttribute("genomesJSON");
      "dataPointSize": 50,
      "legendBox": false,
      "legendScaleFontFactor": 2,
+     "legendTitleScaleFontFactor": 3,
      "legendInside": false,
      "legendPositionAuto": false,
      "legendPosition": "right",
  }
 
  // generate the plot for the selected genome (first being the default)
- function setGenome() {
-     var genome = document.getElementById('genome-selector').value;
+ function setGenome(genome) {
+     // var genome = document.getElementById('genome-selector').value;
      var genomeData = genomesMap[genome];
      var evts = {
          "click": function(o, e, t) {
@@ -63,8 +66,9 @@ String genomesJSON = (String) request.getAttribute("genomesJSON");
              window.open("/"+"${WEB_PROPERTIES['webapp.path']}"+"/geneticmarker:"+markerIdentifier);
          }
      }
-     // update conf.chromosomeLengths
+     // update genome-specific conf attributes
      conf["chromosomeLengths"] = genomeData["chromosomeLengths"];
+     conf["title"] = genome;
      // set the plot data
      var data = {
          z: {
@@ -77,20 +81,27 @@ String genomesJSON = (String) request.getAttribute("genomesJSON");
          }
      }
      // create/update the CanvasXpress object
-     var cx = CanvasXpress.$('canvasx');
+     var cx = CanvasXpress.$(genome);
      if (cx==null) {
-         cx = new CanvasXpress('canvasx', data, conf, evts);
+         cx = new CanvasXpress(genome, data, conf, evts);
      } else {
          cx.updateData(data);
      }
  }
 
- // create the plot for the default genome
- setGenome();
+ // create a stacked plot for each genome (doing it via selector doesn't work yet)
+ for (var i=0; i<genomes.length; i++) {
+     setGenome(genomes[i]);
+ }
 </script>
-<div style="padding:5px 0">
-    <select id="genome-selector" onChange="setGenome();"></select> <b>Select a genome for the Manhattan plot</b>
-</div>
-<canvas id="canvasx" width="${width}" height="${height}"></canvas>
+<!--
+    <div style="padding:5px 0">
+      <select id="genome-selector" onChange="setGenome();"></select> <b>Select a genome for the Manhattan plot</b>
+    </div>
+-->
+<% for (String genome : genomes) { %>
+    <canvas id="<%=genome%>" width="${width}" height="${height}"></canvas>
+<% } %>
+<!-- this br is required to prevent a scrollbar on the report page -->
 <br clear="all"/>
 <!-- /gwasDisplayer.jsp -->
