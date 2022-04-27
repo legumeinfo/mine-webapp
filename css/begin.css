@@ -289,16 +289,12 @@ html, body {
     left: 18px;
 }
 
-#search-bochs div.inner span.ugly-hack {
-    width: 82px;
-}
-
 #search-bochs div.inner p {
     margin-top: 10px;
 }
 
 #lists-bochs div.inner p {
-    margin: 10px 0 0 70px;
+    /* margin: 10px 0 0 70px; */
 }
 
 #welcome-bochs div.inner p {

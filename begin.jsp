@@ -16,8 +16,6 @@
             <img class="title" src="themes/purple/homepage/search-ico-right.png" title="search"/>
             <div class="inner">
                 <h3><c:out value="${WEB_PROPERTIES['begin.searchBox.title']}" /></h3>
-                <!-- this makes room for the magnifying glass image -->
-                <span class="ugly-hack">&nbsp;</span>
                 <p><c:out value="${WEB_PROPERTIES['begin.searchBox.description']}" escapeXml="false" /></p>
                 <form action="<c:url value="/keywordSearchResults.do" />" name="search" method="get">
                     <div class="input"><input id="actionsInput" name="searchTerm" class="input" type="text" value="${WEB_PROPERTIES['begin.searchBox.example']}"></div>
@@ -68,7 +66,7 @@
                                 <textarea id="listInput" name="text"><c:out value="${WEB_PROPERTIES['bag.example.identifiers']}" /></textarea>
                             </c:when>
                             <c:otherwise>
-                                <textarea id="listInput" name="text">e.g. <c:out value="${WEB_PROPERTIES['bag.example.identifiers']}" /></textarea>
+                                <textarea id="listInput" name="text"><c:out value="${WEB_PROPERTIES['bag.example.identifiers']}" /></textarea>
                             </c:otherwise>
                         </c:choose>
                     </div>
@@ -76,7 +74,7 @@
                         <center>
                             <a class="advanced" href="bag.do?subtab=upload">advanced</a>
                             <br />
-                            <input class="button light" type="submit" value="analyse"/>
+                            <input class="button light" type="submit" value="make list"/>
                         </center>
                     </div>
                 </form>
@@ -351,7 +349,7 @@
  }
 
  var placeholder = '<c:out value="${WEB_PROPERTIES['begin.searchBox.example']}" />';
- var placeholderTextarea = 'e.g. <c:out value="${WEB_PROPERTIES['bag.example.identifiers']}" />';
+ var placeholderTextarea = '<c:out value="${WEB_PROPERTIES['bag.example.identifiers']}" />';
  var inputToggleClass = 'eg';
 
  // e.g. values only available when JavaScript is on

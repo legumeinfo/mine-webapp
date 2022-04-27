@@ -25,15 +25,11 @@
   
   <!-- logos -->
   <div style="padding:0px;">
-    <div style="float:left; width:33%; margin:auto; height:71px; padding-top:4px;">
+    <div style="float:left; width:50%; height:71px; padding-top:4px;">
       <!-- USDA-ARS -->
       <a target="_new" href="https://usda.gov/" title="USDA"><img src="model/images/USDA-92x67.png" alt="USDA"/></a>
     </div>
-    <div style="float:left; width:33%; margin:auto; height:73px; padding-top:2px;">
-      <!-- LegFed member -->
-      <a target="_new" href="https://legumefederation.org/" title="Legume Federation"><img src="https://mines.legumeinfo.org/legfed-member.png" alt="Legume Federation"/></a>
-    </div>
-    <div style="float:right; width:33%; margin:auto; height:50px; padding-top:25px;">
+    <div style="float:right; width:50%; height:50px; padding-top:25px;">
       <!-- powered by InterMine-->
       <a target="new" href="http://intermine.org/" title="InterMine"><img src="images/icons/intermine-footer-logo.png" alt="InterMine logo" /></a>
     </div>
