@@ -13,7 +13,7 @@
 <%
 // request data from GenotypeMatrixDisplayer
 String studyPrimaryIdentifier = (String) request.getAttribute("studyPrimaryIdentifier");
-List<String> chrSecondaryIdentifiers = (List<String>) request.getAttribute("chrSecondaryIdentifiers");
+List<String> chrNames = (List<String>) request.getAttribute("chrNames");
 
 // list names for filtering
 // NOT IN USE
@@ -96,7 +96,7 @@ table.dataTable.no-footer {
 
 <script type="text/javascript">
  var studyPrimaryIdentifier = '<%=studyPrimaryIdentifier%>';
- var chrSecondaryIdentifier = '<%=chrSecondaryIdentifiers.get(0)%>';
+ var chrName = '<%=chrNames.get(0)%>';
  var genotypingRecordLength = ${genotypingRecordLength};
  var genotypingRecordAdvance = ${genotypingRecordAdvance};
  var genotypingRecordAdvanceDefault = ${genotypingRecordAdvance};
@@ -111,7 +111,7 @@ table.dataTable.no-footer {
 <div class="jumpForm">
     Chr:
     <select id="jumpTo">
-        <% for (String chr : chrSecondaryIdentifiers) { %>
+        <% for (String chr : chrNames) { %>
             <option><%=chr%></option>
         <% } %>
     </select>
@@ -193,7 +193,7 @@ $(document).ready(function() {
             type: 'POST',
             data: {
                 "studyPrimaryIdentifier": function() { return studyPrimaryIdentifier; },
-                "chrSecondaryIdentifier": function() { return chrSecondaryIdentifier; },
+                "chrName": function() { return chrName; },
                 "genotypingRecordLength": function() { return genotypingRecordLength; },
                 "genotypingRecordStart":  function() { return genotypingRecordStart; },
                 "genotypingRecordAdvance": function() { return genotypingRecordAdvance; },
@@ -208,7 +208,7 @@ $(document).ready(function() {
                 data: {
                     "isHeaderQuery": true,
                     "studyPrimaryIdentifier": function() { return studyPrimaryIdentifier; },
-                    "chrSecondaryIdentifier": function() { return chrSecondaryIdentifier; },
+                    "chrName": function() { return chrName; },
                     "genotypingRecordLength": function() { return genotypingRecordLength; },
                     "genotypingRecordStart":  function() { return genotypingRecordStart; },
                     "genotypingRecordAdvance": function() { return genotypingRecordAdvance; },
@@ -377,7 +377,7 @@ $(document).ready(function() {
     });
      
      $('#jumpTo').on('change', function() {
-         chrSecondaryIdentifier = $('#jumpTo').val();
+         chrName = $('#jumpTo').val();
          genotypingRecordStart = 0;
          table.ajax.reload();
      });

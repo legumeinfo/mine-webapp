@@ -9,7 +9,7 @@
 <%
 // HTTP REQUEST VARS
 String studyPrimaryIdentifier = request.getParameter("studyPrimaryIdentifier");
-String chrSecondaryIdentifier = request.getParameter("chrSecondaryIdentifier");
+String chrName = request.getParameter("chrName");
 int genotypingRecordLength = Integer.parseInt(request.getParameter("genotypingRecordLength"));
 int genotypingRecordStart = Integer.parseInt(request.getParameter("genotypingRecordStart"));
 int genotypingRecordAdvance = Integer.parseInt(request.getParameter("genotypingRecordAdvance"));
@@ -51,12 +51,12 @@ if (isHeaderQuery) {
     // query genotyping records with paging
     // ASSUME MARKER
     PathQuery genotypingHeaderQuery = new PathQuery(im.getModel());
-    genotypingHeaderQuery.addViews("GenotypingRecord.marker.secondaryIdentifier",            // 0
-                                   "GenotypingRecord.marker.chromosome.secondaryIdentifier", // 1
-                                   "GenotypingRecord.marker.chromosomeLocation.start");      // 2
+    genotypingHeaderQuery.addViews("GenotypingRecord.markers.name",                           // 0
+                                   "GenotypingRecord.markers.chromosome.name",                // 1
+                                   "GenotypingRecord.markers.chromosomeLocation.start");      // 2
     genotypingHeaderQuery.addConstraint(Constraints.eq("GenotypingRecord.study.primaryIdentifier", studyPrimaryIdentifier));
-    genotypingHeaderQuery.addConstraint(Constraints.eq("GenotypingRecord.marker.chromosome.secondaryIdentifier", chrSecondaryIdentifier));
-    genotypingHeaderQuery.addOrderBy("GenotypingRecord.marker.chromosomeLocation.start", OrderDirection.ASC);
+    genotypingHeaderQuery.addConstraint(Constraints.eq("GenotypingRecord.markers.chromosome.name", chrName));
+    genotypingHeaderQuery.addOrderBy("GenotypingRecord.markers.chromosomeLocation.start", OrderDirection.ASC);
     // get the record count for this chromosome
     int genotypingRecordCount = executor.count(genotypingHeaderQuery);
     // run the genotyping record query with paging
@@ -128,16 +128,16 @@ if (isHeaderQuery) {
     // query genotyping records with paging
     // ASSUME MARKERS
     List<String> genotypingRecordIdStrings = new LinkedList<>();             // convenience for Constraints.oneOfValues
-    Map<Integer,String> genotypingRecordIdentifiers = new LinkedHashMap<>(); // keyed by GenotypingRecord id
+    Map<Integer,String> genotypingRecordMarkerNames = new LinkedHashMap<>(); // keyed by GenotypingRecord id
     Map<Integer,String> genotypingRecordChromosomes = new LinkedHashMap<>(); // keyed by GenotypingRecord id
     Map<Integer,Integer> genotypingRecordLocations = new LinkedHashMap<>();  // keyed by GenotypingRecord id
     PathQuery genotypingRecordQuery = new PathQuery(im.getModel());
-    genotypingRecordQuery.addViews("GenotypingRecord.identifier",                            // 0
-                                   "GenotypingRecord.marker.chromosome.secondaryIdentifier", // 1
-                                   "GenotypingRecord.marker.chromosomeLocation.start");      // 2
+    genotypingRecordQuery.addViews("GenotypingRecord.markerName",                        // 0
+                                   "GenotypingRecord.markers.chromosome.name",           // 1
+                                   "GenotypingRecord.markers.chromosomeLocation.start"); // 2
     genotypingRecordQuery.addConstraint(Constraints.eq("GenotypingRecord.study.primaryIdentifier", studyPrimaryIdentifier));
-    genotypingRecordQuery.addConstraint(Constraints.eq("GenotypingRecord.marker.chromosome.secondaryIdentifier", chrSecondaryIdentifier));
-    genotypingRecordQuery.addOrderBy("GenotypingRecord.marker.chromosomeLocation.start", OrderDirection.ASC);
+    genotypingRecordQuery.addConstraint(Constraints.eq("GenotypingRecord.markers.chromosome.name", chrName));
+    genotypingRecordQuery.addOrderBy("GenotypingRecord.markers.chromosomeLocation.start", OrderDirection.ASC);
     if (genotypingRecordLength>0) {
         iterator = executor.execute(genotypingRecordQuery, genotypingRecordStart, genotypingRecordLength);
     } else {
@@ -146,11 +146,11 @@ if (isHeaderQuery) {
     while (iterator.hasNext()) {
         List<ResultElement> results = iterator.next();
         Integer id = results.get(0).getId();
-        String identifier = (String) results.get(0).getField();
+        String markerName = (String) results.get(0).getField();
         String chromosome = (String) results.get(1).getField();
         Integer location = (Integer) results.get(2).getField();
         genotypingRecordIdStrings.add(String.valueOf(id));
-        genotypingRecordIdentifiers.put(id, identifier);
+        genotypingRecordMarkerNames.put(id, markerName);
         genotypingRecordChromosomes.put(id, chromosome);
         genotypingRecordLocations.put(id, location);
     }
@@ -163,10 +163,10 @@ if (isHeaderQuery) {
             String sample = samples.get(sampleId);
             PathQuery genotypeQuery = new PathQuery(im.getModel());
             genotypeQuery.addViews("Genotype.value",                                        // 0
-                                   "Genotype.record.marker.chromosomeLocation.start");      // 1
+                                   "Genotype.record.markers.chromosomeLocation.start");     // 1
             genotypeQuery.addConstraint(Constraints.eq("Genotype.sample.id", String.valueOf(sampleId)));
             genotypeQuery.addConstraint(Constraints.oneOfValues("Genotype.record.id", genotypingRecordIdStrings));
-            genotypeQuery.addOrderBy("Genotype.record.marker.chromosomeLocation.start", OrderDirection.ASC);
+            genotypeQuery.addOrderBy("Genotype.record.markers.chromosomeLocation.start", OrderDirection.ASC);
             iterator = executor.execute(genotypeQuery);
             String[] genotypes = new String[genotypingRecordIdStrings.size()];
             int i = 0;
