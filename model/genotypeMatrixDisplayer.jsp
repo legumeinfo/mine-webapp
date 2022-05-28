@@ -159,13 +159,14 @@ $(document).ready(function() {
                 "targets": '_all',
                 "className": 'dt-center',
                 "createdCell": function (td, cellData, rowData, row, col) {
-                    if (cellData=='A' || cellData=='a' || cellData=='A/A' || cellData=='a/a') {
+                    if (cellData=='A' || cellData=='a' || cellData=='A/A' || cellData=='a/a' || cellData=='AA' || cellData=='aa') {
                         $(td).css("background-color", "#e31a1c");
-                    } else if (cellData=='C' || cellData=='c' || cellData=='C/C' || cellData=='c/c') {
+                    } else if (cellData=='C' || cellData=='c' || cellData=='C/C' || cellData=='c/c' || cellData=='CC' || cellData=='cc') {
                         $(td).css("background-color", "#1f78b4");
-                    } else if (cellData=='G' || cellData=='g' || cellData=='G/G' || cellData=='g/g' || cellData=='B' || cellData=='b') {
+                    } else if (cellData=='G' || cellData=='g' || cellData=='G/G' || cellData=='g/g' || cellData=='GG' || cellData=='gg' ||
+                               cellData=='B' || cellData=='b') {
                         $(td).css("background-color", "#33a02c");
-                    } else if (cellData=='T' || cellData=='t' || cellData=='T/T' || cellData=='t/t') {
+                    } else if (cellData=='T' || cellData=='t' || cellData=='T/T' || cellData=='t/t' || cellData=='TT' || cellData=='tt') {
                         $(td).css("background-color", "#6a3d9a");
                     } else if (cellData=='A/C' || cellData=='C/A') {
                         $(td).css("background-color", "#b2df8a");
