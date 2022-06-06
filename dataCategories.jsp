@@ -20,14 +20,15 @@ Model model = im.getModel();
 Profile profile = SessionMethods.getProfile(session);
 PathQueryExecutor executor = im.getPathQueryExecutor(profile);
 
+// load the DataSources into an id-name map
 Map<Integer,String> sourceIdsNames = new LinkedHashMap<>();
 PathQuery sourcesQuery = new PathQuery(model);
 sourcesQuery.addView("DataSource.id");   // 1
 sourcesQuery.addView("DataSource.name"); // 0
 sourcesQuery.addOrderBy("DataSource.name", OrderDirection.ASC);
+sourcesQuery.addConstraint(Constraints.isNotNull("DataSource.dataSets"));
 ExportResultsIterator sourcesResult = executor.execute(sourcesQuery);
 while (sourcesResult.hasNext()) {
-    // grab the fields
     List<ResultElement> sourceRow = sourcesResult.next();
     Integer sourceId = (Integer) sourceRow.get(0).getField();   // 0 DataSource.id
     String sourceName = (String) sourceRow.get(1).getField();   // 1 DataSource.name
@@ -60,26 +61,26 @@ for (Integer sourceId : sourceIdsNames.keySet()) {
 }
 %>
 <div class="body">
-  <h1>Data Sources and their Data Sets</h1>
-  <%
+    <h1>Data Sources and their Data Sets</h1>
+    <%
     for (Integer sourceId : sourceIdsNames.keySet()) {
 	String sourceName = sourceIdsNames.get(sourceId);
 	List<String> setNames = sourcesSetNames.get(sourceId);
     %>
-  <div class="dataSource"><%=sourceName%></div>
-  <div class="dataSet-row">
-    <% for (String setName : setNames) { %>
-    <div class="dataSet-name"><%=setName%></div>
-    <div class="dataSet-description"><%=setDescriptions.get(setName)%></div>
-    <div class="dataSet-link">
-      <% if (setUrls.get(setName)!=null) { %>
-      <a target="_blank" href="<%=setUrls.get(setName)%>">LINK</a>
-      <% } %>
+    <div class="dataSource"><%=sourceName%></div>
+    <div class="dataSet-row">
+        <% for (String setName : setNames) { %>
+            <div class="dataSet-name"><%=setName%></div>
+            <div class="dataSet-description"><%=setDescriptions.get(setName)%></div>
+            <div class="dataSet-link">
+                <% if (setUrls.get(setName)!=null) { %>
+                    <a target="_blank" href="<%=setUrls.get(setName)%>">LINK</a>
+                <% } %>
+            </div>
+        <% } %>
     </div>
-    <% } %>
-  </div>
   <%
-    }
-    %>
+  }
+  %>
 </div>
 <!-- /dataCategories -->
