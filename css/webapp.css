@@ -1718,7 +1718,7 @@ background:rgba(255,255,255,0.9)}
 width:90%;}
 
 /* Dynamic dataCategories.jsp */
-.dataSource {
+.datasource {
     font-size: 125%;
     padding: 5px;
     font-weight: bold;
@@ -1727,25 +1727,22 @@ width:90%;}
     margin: 2px;
 }
 
-.dataSet-row {
+.dataset-row {
     display: grid;
     grid-template-columns: 20% 75% 5%;
 }
 
-.dataSet-description {
+.dataset-synopsis {
     padding: 3px;
     text-align: left;
-    border-bottom: 1px solid gray;
 }
 
-.dataSet-name {
+.dataset-name {
     padding: 3px;
     text-align: left;
-    border-bottom: 1px solid gray;
 }
 
-.dataSet-link {
+.dataset-link {
     padding: 3px;
     text-align:center;
-    border-bottom: 1px solid gray;
 }
