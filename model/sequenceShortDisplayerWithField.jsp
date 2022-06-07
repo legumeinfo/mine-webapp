@@ -13,7 +13,7 @@
         <c:choose>
             <c:when test="${!empty interMineObject.sequence}">
                 <im:value>${outVal}</im:value>&nbsp;
-                <html:link action="sequenceExporter?object=${interMineObject.id}" target="_blank"><html:img styleClass="fasta" src="model/images/fasta.gif" title="FASTA"/></html:link>
+                <jsp:include page="fastaButton.jsp"/>
                 <c:if test="${!empty WEB_PROPERTIES['sequenceserver.url']}">
                     <jsp:include page="sequenceServerBlastButton.jsp"/>
                 </c:if>

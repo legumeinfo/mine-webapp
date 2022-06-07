@@ -1746,3 +1746,23 @@ width:90%;}
     padding: 3px;
     text-align:center;
 }
+
+form.small-button {
+    display: inline;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+form.small-button button {
+    font-size: 8px;
+    font-family: monospace;
+}
+
+.annotation {
+    padding: 5px 0;
+}
+
+.annotation form {
+    display: inline-block;
+}

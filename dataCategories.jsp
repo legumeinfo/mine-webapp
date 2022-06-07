@@ -42,24 +42,28 @@ while (sourcesResult.hasNext()) {
 Map<Integer,List<String>> sourcesSetNames = new LinkedHashMap<>(); // keyed by DataSource.name
 Map<String,String> setSynopses = new LinkedHashMap<>();            // keyed by DataSet.name
 Map<String,String> setUrls = new LinkedHashMap<>();                // keyed by DataSet.name
+Map<String,String> setDescriptions = new LinkedHashMap<>();        // keyed by DataSet.name
 for (Integer sourceId : sourceIdsNames.keySet()) {
     List<String> setNames = new ArrayList<>();
     PathQuery setsQuery = new PathQuery(model);
     setsQuery.addView("DataSet.name");        // 0
     setsQuery.addView("DataSet.synopsis");    // 1
     setsQuery.addView("DataSet.url");         // 2
+    setsQuery.addView("DataSet.description"); // 3
     setsQuery.addConstraint(Constraints.eq("DataSet.dataSource.id", String.valueOf(sourceId)));
     setsQuery.addOrderBy("DataSet.name", OrderDirection.ASC);
     ExportResultsIterator setsResult = executor.execute(setsQuery);
     while (setsResult.hasNext()) {
 	// grab the fields
 	List<ResultElement> setRow = setsResult.next();
-	String setName = (String) setRow.get(0).getField();          // 0 DataSet.name
-	String setSynopsis = (String) setRow.get(1).getField();      // 1 DataSet.synopsis
-	String setUrl = (String) setRow.get(2).getField();           // 2 DataSet.url
-	setNames.add(setName);
-	setSynopses.put(setName, setSynopsis);
-	setUrls.put(setName, setUrl);
+	String name = (String) setRow.get(0).getField();          // 0 DataSet.name
+	String synopsis = (String) setRow.get(1).getField();      // 1 DataSet.synopsis
+	String url = (String) setRow.get(2).getField();           // 2 DataSet.url
+        String description = (String) setRow.get(3).getField();   // 3 DataSet.description
+	setNames.add(name);
+	setSynopses.put(name, synopsis);
+	setUrls.put(name, url);
+        setDescriptions.put(name, description);
     }
     sourcesSetNames.put(sourceId, setNames);
 }
@@ -103,110 +107,110 @@ for (String name : sourcesSetNames.get(lisDatastoreId)) {
 %>
 <div class="body">
     <h1>Data Sources and their Data Sets</h1>
-    <div class="datasource">LIS Datastore: species synopses</div>
+    <div class="datasource">LIS Datastore: species descriptions</div>
     <div class="dataset-row">
-        <% for (String setName : aboutSets) { %>
-            <div class="dataset-name"><%=setName%></div>
-            <div class="dataset-synopsis"><%=setSynopses.get(setName)%></div>
+        <% for (String name : aboutSets) { %>
+            <div class="dataset-name"><%=name%></div>
+            <div class="dataset-synopsis"><%=setDescriptions.get(name)%></div>
             <div class="dataset-link">
-                <% if (setUrls.get(setName)!=null) { %>
-                    <a target="_blank" href="<%=setUrls.get(setName)%>">LINK</a>
+                <% if (setUrls.get(name)!=null) { %>
+                    <a target="_blank" href="<%=setUrls.get(name)%>">LINK</a>
                 <% } %>
             </div>
         <% } %>
     </div>
     <div class="datasource">LIS Datastore: genome assemblies</div>
     <div class="dataset-row">
-        <% for (String setName : genomeSets) { %>
-            <div class="dataset-name"><%=setName%></div>
-            <div class="dataset-synopsis"><%=setSynopses.get(setName)%></div>
+        <% for (String name : genomeSets) { %>
+            <div class="dataset-name"><%=name%></div>
+            <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
             <div class="dataset-link">
-                <% if (setUrls.get(setName)!=null) { %>
-                    <a target="_blank" href="<%=setUrls.get(setName)%>">LINK</a>
+                <% if (setUrls.get(name)!=null) { %>
+                    <a target="_blank" href="<%=setUrls.get(name)%>">LINK</a>
                 <% } %>
             </div>
         <% } %>
     </div>
     <div class="datasource">LIS Datastore: genome annotation</div>
     <div class="dataset-row">
-        <% for (String setName : annotationSets) { %>
-            <div class="dataset-name"><%=setName%></div>
-            <div class="dataset-synopsis"><%=setSynopses.get(setName)%></div>
+        <% for (String name : annotationSets) { %>
+            <div class="dataset-name"><%=name%></div>
+            <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
             <div class="dataset-link">
-                <% if (setUrls.get(setName)!=null) { %>
-                    <a target="_blank" href="<%=setUrls.get(setName)%>">LINK</a>
+                <% if (setUrls.get(name)!=null) { %>
+                    <a target="_blank" href="<%=setUrls.get(name)%>">LINK</a>
                 <% } %>
             </div>
         <% } %>
     </div>
     <div class="datasource">LIS Datastore: gene expression</div>
     <div class="dataset-row">
-        <% for (String setName : expressionSets) { %>
-            <div class="dataset-name"><%=setName%></div>
-            <div class="dataset-synopsis"><%=setSynopses.get(setName)%></div>
+        <% for (String name : expressionSets) { %>
+            <div class="dataset-name"><%=name%></div>
+            <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
             <div class="dataset-link">
-                <% if (setUrls.get(setName)!=null) { %>
-                    <a target="_blank" href="<%=setUrls.get(setName)%>">LINK</a>
+                <% if (setUrls.get(name)!=null) { %>
+                    <a target="_blank" href="<%=setUrls.get(name)%>">LINK</a>
                 <% } %>
             </div>
         <% } %>
     </div>
     <div class="datasource">LIS Datastore: genetic studies</div>
     <div class="dataset-row">
-        <% for (String setName : geneticSets) { %>
-            <div class="dataset-name"><%=setName%></div>
-            <div class="dataset-synopsis"><%=setSynopses.get(setName)%></div>
+        <% for (String name : geneticSets) { %>
+            <div class="dataset-name"><%=name%></div>
+            <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
             <div class="dataset-link">
-                <% if (setUrls.get(setName)!=null) { %>
-                    <a target="_blank" href="<%=setUrls.get(setName)%>">LINK</a>
+                <% if (setUrls.get(name)!=null) { %>
+                    <a target="_blank" href="<%=setUrls.get(name)%>">LINK</a>
                 <% } %>
             </div>
         <% } %>
     </div>
     <div class="datasource">LIS Datastore: genetic maps</div>
     <div class="dataset-row">
-        <% for (String setName : mapSets) { %>
-            <div class="dataset-name"><%=setName%></div>
-            <div class="dataset-synopsis"><%=setSynopses.get(setName)%></div>
+        <% for (String name : mapSets) { %>
+            <div class="dataset-name"><%=name%></div>
+            <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
             <div class="dataset-link">
-                <% if (setUrls.get(setName)!=null) { %>
-                    <a target="_blank" href="<%=setUrls.get(setName)%>">LINK</a>
+                <% if (setUrls.get(name)!=null) { %>
+                    <a target="_blank" href="<%=setUrls.get(name)%>">LINK</a>
                 <% } %>
             </div>
         <% } %>
     </div>
     <div class="datasource">LIS Datastore: genetic markers</div>
     <div class="dataset-row">
-        <% for (String setName : markerSets) { %>
-            <div class="dataset-name"><%=setName%></div>
-            <div class="dataset-synopsis"><%=setSynopses.get(setName)%></div>
+        <% for (String name : markerSets) { %>
+            <div class="dataset-name"><%=name%></div>
+            <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
             <div class="dataset-link">
-                <% if (setUrls.get(setName)!=null) { %>
-                    <a target="_blank" href="<%=setUrls.get(setName)%>">LINK</a>
+                <% if (setUrls.get(name)!=null) { %>
+                    <a target="_blank" href="<%=setUrls.get(name)%>">LINK</a>
                 <% } %>
             </div>
         <% } %>
     </div>
     <div class="datasource">LIS Datastore: synteny</div>
     <div class="dataset-row">
-        <% for (String setName : syntenySets) { %>
-            <div class="dataset-name"><%=setName%></div>
-            <div class="dataset-synopsis"><%=setSynopses.get(setName)%></div>
+        <% for (String name : syntenySets) { %>
+            <div class="dataset-name"><%=name%></div>
+            <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
             <div class="dataset-link">
-                <% if (setUrls.get(setName)!=null) { %>
-                    <a target="_blank" href="<%=setUrls.get(setName)%>">LINK</a>
+                <% if (setUrls.get(name)!=null) { %>
+                    <a target="_blank" href="<%=setUrls.get(name)%>">LINK</a>
                 <% } %>
             </div>
         <% } %>
     </div>
     <div class="datasource">LIS Datastore: other</div>
     <div class="dataset-row">
-        <% for (String setName : otherSets) { %>
-            <div class="dataset-name"><%=setName%></div>
-            <div class="dataset-synopsis"><%=setSynopses.get(setName)%></div>
+        <% for (String name : otherSets) { %>
+            <div class="dataset-name"><%=name%></div>
+            <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
             <div class="dataset-link">
-                <% if (setUrls.get(setName)!=null) { %>
-                    <a target="_blank" href="<%=setUrls.get(setName)%>">LINK</a>
+                <% if (setUrls.get(name)!=null) { %>
+                    <a target="_blank" href="<%=setUrls.get(name)%>">LINK</a>
                 <% } %>
             </div>
         <% } %>
@@ -220,12 +224,12 @@ for (String name : sourcesSetNames.get(lisDatastoreId)) {
     %>
     <div class="datasource"><%=sourceName%></div>
     <div class="dataset-row">
-        <% for (String setName : setNames) { %>
-            <div class="dataset-name"><%=setName%></div>
-            <div class="dataset-synopsis"><%=setSynopses.get(setName)%></div>
+        <% for (String name : setNames) { %>
+            <div class="dataset-name"><%=name%></div>
+            <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
             <div class="dataset-link">
-                <% if (setUrls.get(setName)!=null) { %>
-                    <a target="_blank" href="<%=setUrls.get(setName)%>">LINK</a>
+                <% if (setUrls.get(name)!=null) { %>
+                    <a target="_blank" href="<%=setUrls.get(name)%>">LINK</a>
                 <% } %>
             </div>
         <% } %>
