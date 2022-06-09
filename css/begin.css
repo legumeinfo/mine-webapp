@@ -216,7 +216,7 @@ html, body {
 /* newer FlyMine */
 /*body { background:#dfdfdf url('../themes/purple/homepage/page-bg-gradient.png') repeat-x top !important; }*/
 #content-wrap {
-    padding: 25px 16px 16px 16px;
+    padding: 2px 16px 16px 16px;
 }
 
 #content-wrap p {
