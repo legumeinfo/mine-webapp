@@ -202,6 +202,7 @@ ul#loginbar {
     font-weight: bold;
     float: right;
     margin-top: 5px;
+    margin-bottom: 4px;
 }
 
 ul#loginbar li {
@@ -316,7 +317,7 @@ ul#submenulist li span {
     text-align: left;
     width: 1000px;
     margin: 0;
-    padding: 0;
+    padding: 10px 0;
 }
 
 #pagecontentmax {
@@ -326,6 +327,10 @@ ul#submenulist li span {
     width: 100%;
     margin: 0;
     padding: 10px 0 0 0;
+}
+
+#pagecontent .pagecontent-datacategories {
+    width: 1200px;
 }
 
 .clear-both {
@@ -1719,7 +1724,7 @@ width:90%;}
 
 /* Dynamic dataCategories.jsp */
 .datasource {
-    font-size: 125%;
+    font-size: 100%;
     padding: 5px;
     font-weight: bold;
     background-color: lightgray;
