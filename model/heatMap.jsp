@@ -10,6 +10,7 @@ String errorMessage = (String) request.getAttribute("errorMessage");
 java.util.List<String> sourceList = (java.util.List<String>) request.getAttribute("sources");
 java.util.List<Integer> geneCountsList = (java.util.List<Integer>) request.getAttribute("geneCounts");
 java.util.List<Integer> sampleCountsList = (java.util.List<Integer>) request.getAttribute("sampleCounts");
+java.util.Map<String,String> genePrimaryIDMap = (java.util.Map<String,String>) request.getAttribute("genePrimaryIDMap");
 
 if (errorMessage==null) {
     out.print("<h2>errorMessage is null!</h2>");
@@ -63,6 +64,12 @@ for (int i=0; i<sampleCounts.length; i++) {
  var heatmapIndicatorHistogram = ${WEB_PROPERTIES['heatmap.heatmapIndicatorHistogram']};
  var heatmapIndicatorHeight = ${WEB_PROPERTIES['heatmap.heatmapIndicatorHeight']};
  var heatmapIndicatorWidth = ${WEB_PROPERTIES['heatmap.heatmapIndicatorWidth']};
+
+ // the map of gene secondaryIdentifier -> primaryIdentifier for gene links
+ var genePrimaryIDMap = new Map();
+ <% for (String key : genePrimaryIDMap.keySet()) { %>
+ genePrimaryIDMap.set('<%=key%>', '<%=genePrimaryIDMap.get(key)%>');
+ <% } %>
  
  // the (static) CanvasXpress configuration
  var conf = {
@@ -133,8 +140,8 @@ for (int i=0; i<sampleCounts.length; i++) {
      // the CanvasXpress event handlers
      // 
      // NOTE: do not put comments inside functions!
-     // NOTE: gene click link requires that class_keys.properties has Gene_URI=secondaryIdentifier
-     // Example: window.open("/medicmine/gene:Medtr0002s0420");
+     // NOTE: gene click link generates a FAIR URI using the Gene.primaryIdentifier.
+     // Example: window.open("/medicmine/gene:medtr.R108.gnm1.ann1.Medtr0002s0420");
      var evts = {
 	 "mousemove": function(o, e, t) {
              if (o.y.vars.length==1 && o.y.smps.length==1) {
@@ -146,7 +153,7 @@ for (int i=0; i<sampleCounts.length; i++) {
                  t.showInfoSpan(e, s);
              } else if (o.y.smps.length==1) {
                  var gene = o.y.smps[0];
-                 var url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+gene;
+                 var url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+genePrimaryIDMap.get(gene);
                  t.showInfoSpan(e, "go to "+gene+" gene page");
              }
 	 },
@@ -155,7 +162,7 @@ for (int i=0; i<sampleCounts.length; i++) {
          "click": function(o, e, t) {
              if (o.y.smps.length==1) {
                  var gene = o.y.smps[0];
-                 var url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+gene;
+                 var url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+genePrimaryIDMap.get(gene);
                  window.open(url);
              }
          },
