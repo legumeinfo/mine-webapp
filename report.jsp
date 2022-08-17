@@ -68,7 +68,7 @@
                             <c:if test="${status.count > 0}"> </c:if><strong><c:out escapeXml="false" value="${title.value.formatted}" /></strong>
                         </c:forEach>
                         <c:forEach var="title" varStatus="status" items="${object.titleSub}">
-                            <c:if test="${status.count > 0}"> </c:if><c:out escapeXml="false" value="${title.value.formatted}" />
+                            <span> </span><c:out escapeXml="false" value="${title.value.formatted}" />
                         </c:forEach>
                     </h1>
                 </a>
