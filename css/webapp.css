@@ -225,15 +225,14 @@ div#quicksearch {
     white-space: nowrap;
 }
 
-#submenu {
+#submenu { 
     clear: both;
-    float: left;
-    width: 100%;
+    width: 1000px;
     white-space: nowrap;
     padding: 0px;
     margin: 0;
     height: 36px;
-    color: #CCC;
+    color: #EEE;
     font-size: 12px;
 }
 
@@ -326,7 +325,7 @@ ul#submenulist li span {
     text-align: left;
     width: 100%;
     margin: 0;
-    padding: 10px 0 0 0;
+    padding: 0;
 }
 
 #pagecontent .pagecontent-datacategories {
@@ -1732,24 +1731,12 @@ width:90%;}
     margin: 2px;
 }
 
-.dataset-row {
-    display: grid;
-    grid-template-columns: 20% 75% 5%;
+ul.dataset-row {
 }
-
-.dataset-synopsis {
-    padding: 3px;
-    text-align: left;
-}
-
 .dataset-name {
-    padding: 3px;
-    text-align: left;
 }
-
-.dataset-link {
-    padding: 3px;
-    text-align:center;
+.dataset-synopsis {
+    font-style: italic;
 }
 
 form.small-button {
