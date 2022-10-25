@@ -70,33 +70,36 @@ for (Integer sourceId : sourceIdsNames.keySet()) {
 
 // for the case of LIS sources group into collection categories
 List<String> aboutSets = new ArrayList<>();
-List<String> annotationSets = new ArrayList<>();
-List<String> expressionSets = new ArrayList<>();
-List<String> geneticSets = new ArrayList<>();
 List<String> genomeSets = new ArrayList<>();
-List<String> mapSets = new ArrayList<>();
-List<String> markerSets = new ArrayList<>();
+List<String> annotationSets = new ArrayList<>();
 List<String> syntenySets = new ArrayList<>();
+List<String> expressionSets = new ArrayList<>();
+List<String> markerSets = new ArrayList<>();
+List<String> mapSets = new ArrayList<>();
+List<String> gwasSets = new ArrayList<>();
+List<String> qtlSets = new ArrayList<>();
 List<String> otherSets = new ArrayList<>();
 for (String name : sourcesSetNames.get(lisDatastoreId)) {
     String url = setUrls.get(name);
     if (url!=null) {
         if (url.contains("about_this_collection")) {
             aboutSets.add(name);
-        } else if (url.contains("/annotations/")) {
-            annotationSets.add(name);
-        } else if (url.contains("/expression/")) {
-            expressionSets.add(name);
-        } else if (url.contains("/genetic/")) {
-            geneticSets.add(name);
         } else if (url.contains("/genomes/")) {
             genomeSets.add(name);
-        } else if (url.contains("/maps/")) {
-            mapSets.add(name);
-        } else if (url.contains("/markers/")) {
-            markerSets.add(name);
+        } else if (url.contains("/annotations/")) {
+            annotationSets.add(name);
         } else if (url.contains("/synteny/")) {
             syntenySets.add(name);
+        } else if (url.contains("/expression/")) {
+            expressionSets.add(name);
+        } else if (url.contains("/markers/")) {
+            markerSets.add(name);
+        } else if (url.contains("/maps/")) {
+            mapSets.add(name);
+        } else if (url.contains("/gwas/")) {
+            gwasSets.add(name);
+        } else if (url.contains("/qtl/")) {
+            qtlSets.add(name);
         } else {
             otherSets.add(name);
         }
@@ -105,122 +108,54 @@ for (String name : sourcesSetNames.get(lisDatastoreId)) {
     }
 }
 %>
-<div id="pagecontentcontainer" align="center">
-    <div id="pagecontent" class="pagecontent-datacategories">
-        <div class="datasource">LIS Datastore: species descriptions</div>
-        <ul class="dataset-row">
-            <% for (String name : aboutSets) { %>
-                <li>
-                    <div class="dataset-name">
-                        <% if (setUrls.get(name)!=null) { %>
-                            <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
-                        <% } else { %>
-                            <b><%=name%></b>
-                        <% } %>
-                    </div>
-                    <div class="dataset-synopsis"><%=setDescriptions.get(name)%></div>
-                </li>
-            <% } %>
-        </ul>
-        <div class="datasource">LIS Datastore: genome assemblies</div>
-        <ul class="dataset-row">
-            <% for (String name : genomeSets) { %>
-                <li>
-                    <div class="dataset-name">
-                        <% if (setUrls.get(name)!=null) { %>
-                            <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
-                        <% } else { %>
-                            <b><%=name%></b>
-                        <% } %>
-                    </div>
-                    <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
-                </li>
-            <% } %>
-        </ul>
-        <div class="datasource">LIS Datastore: genome annotation</div>
-        <ul class="dataset-row">
-            <% for (String name : annotationSets) { %>
-                <li>
-                    <div class="dataset-name">
-                        <% if (setUrls.get(name)!=null) { %>
-                            <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
-                        <% } else { %>
-                            <b><%=name%></b>
-                        <% } %>
-                    </div>
-                    <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
-                </li>
-            <% } %>
-        </ul>
-        <% if (expressionSets.size()>0) { %>
-        <div class="datasource">LIS Datastore: gene expression</div>
-        <ul class="dataset-row">
-            <% for (String name : expressionSets) { %>
-                <li>
-                    <div class="dataset-name">
-                        <% if (setUrls.get(name)!=null) { %>
-                            <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
-                        <% } else { %>
-                            <b><%=name%></b>
-                        <% } %>
-                    </div>
-                    <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
-                </li>
-            <% } %>
-        </ul>
+<div id="pagecontent">
+    <div class="datasource">LIS Datastore: species descriptions</div>
+    <ul class="dataset-row">
+        <% for (String name : aboutSets) { %>
+            <li>
+                <div class="dataset-name">
+                    <% if (setUrls.get(name)!=null) { %>
+                        <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
+                    <% } else { %>
+                        <b><%=name%></b>
+                    <% } %>
+                </div>
+                <div class="dataset-synopsis"><%=setDescriptions.get(name)%></div>
+            </li>
         <% } %>
-        <% if (geneticSets.size()>0) { %>
-        <div class="datasource">LIS Datastore: genetic studies</div>
-        <ul class="dataset-row">
-            <% for (String name : geneticSets) { %>
-                <li>
-                    <div class="dataset-name">
-                        <% if (setUrls.get(name)!=null) { %>
-                            <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
-                        <% } else { %>
-                            <b><%=name%></b>
-                        <% } %>
-                    </div>
-                    <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
-                </li>
-            <% } %>
-        </ul>
+    </ul>
+    <div class="datasource">LIS Datastore: genome assemblies</div>
+    <ul class="dataset-row">
+        <% for (String name : genomeSets) { %>
+            <li>
+                <div class="dataset-name">
+                    <% if (setUrls.get(name)!=null) { %>
+                        <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
+                    <% } else { %>
+                        <b><%=name%></b>
+                    <% } %>
+                </div>
+                <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
+            </li>
         <% } %>
-        <% if (mapSets.size()>0) { %>
-        <div class="datasource">LIS Datastore: genetic maps</div>
-        <ul class="dataset-row">
-            <% for (String name : mapSets) { %>
-                <li>
-                    <div class="dataset-name">
-                        <% if (setUrls.get(name)!=null) { %>
-                            <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
-                        <% } else { %>
-                            <b><%=name%></b>
-                        <% } %>
-                    </div>
-                    <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
-                </li>
-            <% } %>
-        </ul>
+    </ul>
+    <div class="datasource">LIS Datastore: genome annotation</div>
+    <ul class="dataset-row">
+        <% for (String name : annotationSets) { %>
+            <li>
+                <div class="dataset-name">
+                    <% if (setUrls.get(name)!=null) { %>
+                        <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
+                    <% } else { %>
+                        <b><%=name%></b>
+                    <% } %>
+                </div>
+                <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
+            </li>
         <% } %>
-        <% if (markerSets.size()>0) { %>
-        <div class="datasource">LIS Datastore: genetic markers</div>
-        <ul class="dataset-row">
-            <% for (String name : markerSets) { %>
-                <li>
-                    <div class="dataset-name">
-                        <% if (setUrls.get(name)!=null) { %>
-                            <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
-                        <% } else { %>
-                            <b><%=name%></b>
-                        <% } %>
-                    </div>
-                    <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
-                </li>
-            <% } %>
-        </ul>
-        <% } %>
-        <% if (syntenySets.size()>0) { %>
+    </ul>
+
+    <% if (syntenySets.size()>0) { %>
         <div class="datasource">LIS Datastore: synteny</div>
         <ul class="dataset-row">
             <% for (String name : syntenySets) { %>
@@ -236,8 +171,99 @@ for (String name : sourcesSetNames.get(lisDatastoreId)) {
                 </li>
             <% } %>
         </ul>
-        <% } %>
-        <% if (otherSets.size()>0) { %>
+    <% } %>
+
+    <% if (expressionSets.size()>0) { %>
+        <div class="datasource">LIS Datastore: gene expression</div>
+        <ul class="dataset-row">
+            <% for (String name : expressionSets) { %>
+                <li>
+                    <div class="dataset-name">
+                        <% if (setUrls.get(name)!=null) { %>
+                            <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
+                        <% } else { %>
+                            <b><%=name%></b>
+                        <% } %>
+                    </div>
+                    <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
+                </li>
+            <% } %>
+        </ul>
+    <% } %>
+
+    <% if (markerSets.size()>0) { %>
+        <div class="datasource">LIS Datastore: genetic markers</div>
+        <ul class="dataset-row">
+            <% for (String name : markerSets) { %>
+                <li>
+                    <div class="dataset-name">
+                        <% if (setUrls.get(name)!=null) { %>
+                            <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
+                        <% } else { %>
+                            <b><%=name%></b>
+                        <% } %>
+                    </div>
+                    <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
+                </li>
+            <% } %>
+        </ul>
+    <% } %>
+
+    <% if (gwasSets.size()>0) { %>
+        <div class="datasource">LIS Datastore: GWAS</div>
+        <ul class="dataset-row">
+            <% for (String name : gwasSets) { %>
+                <li>
+                    <div class="dataset-name">
+                        <% if (setUrls.get(name)!=null) { %>
+                            <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
+                        <% } else { %>
+                            <b><%=name%></b>
+                        <% } %>
+                    </div>
+                    <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
+                </li>
+            <% } %>
+        </ul>
+    <% } %>
+
+    <% if (mapSets.size()>0) { %>
+        <div class="datasource">LIS Datastore: genetic maps</div>
+        <ul class="dataset-row">
+            <% for (String name : mapSets) { %>
+                <li>
+                    <div class="dataset-name">
+                        <% if (setUrls.get(name)!=null) { %>
+                            <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
+                        <% } else { %>
+                            <b><%=name%></b>
+                        <% } %>
+                    </div>
+                    <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
+                </li>
+            <% } %>
+        </ul>
+    <% } %>
+
+    <% if (qtlSets.size()>0) { %>
+        <div class="datasource">LIS Datastore: QTL studies</div>
+        <ul class="dataset-row">
+            <% for (String name : qtlSets) { %>
+                <li>
+                    <div class="dataset-name">
+                        <% if (setUrls.get(name)!=null) { %>
+                            <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
+                        <% } else { %>
+                            <b><%=name%></b>
+                        <% } %>
+                    </div>
+                    <div class="dataset-synopsis"><%=setSynopses.get(name)%></div>
+                </li>
+            <% } %>
+        </ul>
+    <% } %>
+
+    <% if (otherSets.size()>0) { %>
         <div class="datasource">LIS Datastore: other</div>
         <ul class="dataset-row">
             <% for (String name : otherSets) { %>
@@ -253,31 +279,31 @@ for (String name : sourcesSetNames.get(lisDatastoreId)) {
                 </li>
             <% } %>
         </ul>
+    <% } %>
+
+    <%
+    // non-LIS data sources
+    for (Integer sourceId : sourceIdsNames.keySet()) {
+        if (sourceId==lisDatastoreId) continue;
+        String sourceName = sourceIdsNames.get(sourceId);
+        List<String> setNames = sourcesSetNames.get(sourceId);
+    %>
+    <div class="datasource"><%=sourceName%></div>
+    <ul class="dataset-row">
+        <% for (String name : setNames) { %>
+            <li>
+                <div class="dataset-name">
+                    <% if (setUrls.get(name)!=null) { %>
+                        <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
+                    <% } else { %>
+                        <b><%=name%></b>
+                    <% } %>
+                </div>
+            </li>
         <% } %>
-        <%
-        // non-LIS data sources
-        for (Integer sourceId : sourceIdsNames.keySet()) {
-            if (sourceId==lisDatastoreId) continue;
-	    String sourceName = sourceIdsNames.get(sourceId);
-	    List<String> setNames = sourcesSetNames.get(sourceId);
-        %>
-        <div class="datasource"><%=sourceName%></div>
-        <ul class="dataset-row">
-            <% for (String name : setNames) { %>
-                <li>
-                    <div class="dataset-name">
-                        <% if (setUrls.get(name)!=null) { %>
-                            <a target="_blank" href="<%=setUrls.get(name)%>"><b><%=name%></b></a>
-                        <% } else { %>
-                            <b><%=name%></b>
-                        <% } %>
-                    </div>
-                </li>
-            <% } %>
-        </ul>
+    </ul>
   <%
   }
   %>
-    </div>
 </div>
 <!-- /dataCategories -->

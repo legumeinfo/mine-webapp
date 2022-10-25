@@ -305,7 +305,6 @@ ul#submenulist li span {
 }
 
 #pagecontentcontainer {
-    /*background: url('../theme/blue_grad.png') repeat-x bottom #F5F0FF;*/
     margin: 0;
     clear: both;
 }
@@ -320,16 +319,12 @@ ul#submenulist li span {
 }
 
 #pagecontentmax {
-    clear: both;
-    background-color: #FFF;
-    text-align: left;
-    width: 100%;
-    margin: 0;
-    padding: 5px;
-}
-
-#pagecontent .pagecontent-datacategories {
-    width: 1200px;
+    /* clear: both; */
+    /* background-color: #FFF; */
+    /* text-align: left; */
+    /* width: 100%; */
+    /* margin: 0; */
+    /* padding: 10px 0 0 0; */
 }
 
 .clear-both {
