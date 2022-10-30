@@ -337,7 +337,7 @@
     </headerconfig>
     <fields>
       <fieldconfig fieldExpr="description" label="Description" doNotTruncate="true"/>
-      <fieldconfig fieldExpr="identifier" label="Identifier"/>
+      <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
     </fields>
   </class>
 
@@ -355,8 +355,9 @@
       </titles>
     </headerconfig>
     <fields>
-      <fieldconfig fieldExpr="identifier"/>
+      <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
       <fieldconfig fieldExpr="name"/>
+      <fieldconfig fieldExpr="stableIdentifier" label="Stable Identifier"/>
     </fields>
   </class>
 
@@ -436,21 +437,8 @@
       <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
       <fieldconfig fieldExpr="synopsis" label="Synopsis" doNotTruncate="true"/>
       <fieldconfig fieldExpr="geoSeries" label="NCBI GEO Accession"/>
-      <fieldconfig fieldExpr="bioProject.accession" label="NCBI BioProject"/>
+      <fieldconfig fieldExpr="bioProject" label="NCBI BioProject"/>
       <fieldconfig fieldExpr="sra" label="NCBI SRA"/>
-    </fields>
-  </class>
-
-  <class className="org.intermine.model.bio.BioProject">
-    <headerconfig>
-      <titles>
-        <title mainTitles="title" numberofMainTitlesToShow="1"/>
-      </titles>
-    </headerconfig>
-    <fields>
-      <fieldconfig fieldExpr="accession" label="NCBI Accession"/>
-      <fieldconfig fieldExpr="title" label="Title"/>
-      <fieldconfig fieldExpr="description" label="Description" doNotTruncate="true"/>
     </fields>
   </class>
 
@@ -524,14 +512,6 @@
     </fields>
   </class>
 
-  <class className="org.intermine.model.bio.Phylotree">
-    <headerconfig>
-      <titles>
-        <title mainTitles="identifier" numberOfMainTitlesToShow="1"/>
-       </titles>
-    </headerconfig>
-  </class>
-
   <class className="org.intermine.model.bio.Phylonode">
     <headerconfig>
       <titles>
@@ -602,12 +582,11 @@
                      placement="summary"
                      types="QTLStudy"/>
     
-    <reportdisplayer javaClass="org.ncgr.intermine.bio.web.displayer.PhylotreeDisplayer"
-                     jspName="model/phylotreeDisplayer.jsp"
-                     replacesFields=""
-                     placement="summary"
-                     types="GeneFamily,Phylotree"/>
-
+    <!-- <reportdisplayer javaClass="org.ncgr.intermine.bio.web.displayer.PhylotreeDisplayer" -->
+    <!--                  jspName="model/phylotreeDisplayer.jsp" -->
+    <!--                  replacesFields="" -->
+    <!--                  placement="summary" -->
+    <!--                  types="GeneFamily,Phylotree"/> -->
 
     <!-- <reportdisplayer javaClass="org.ncgr.intermine.bio.web.displayer.MarkerDisplayer" -->
     <!--                  jspName="model/markerAlleleInfo.jsp" -->
@@ -680,7 +659,7 @@
                                startClass="Gene"
                                startClassDisplay="primaryIdentifier"
                                enrich="geneFamilyAssignments.geneFamily.description"
-                               enrichIdentifier="geneFamilyAssignments.geneFamily.identifier"
+                               enrichIdentifier="geneFamilyAssignments.geneFamily.primaryIdentifier"
                                constraints="organism.name=[list]"
                                typeClass="Gene"
                                views="secondaryIdentifier, organism.name, geneFamilyAssignments.geneFamily.description"/>
