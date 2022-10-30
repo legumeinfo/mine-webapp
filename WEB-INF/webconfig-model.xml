@@ -8,6 +8,11 @@
   </class>
 
   <class className="org.intermine.model.bio.Annotatable">
+    <headerconfig>
+      <titles>
+        <title mainTitles="primaryIdentifier" numberOfMainTitlesToShow="1"/>
+       </titles>
+    </headerconfig>
     <fields>
       <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
     </fields>
