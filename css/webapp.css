@@ -322,9 +322,7 @@ ul#submenulist li span {
     clear: both;
     background-color: #FFF;
     text-align: left;
-    width: 100%;
-    margin: 0;
-    padding: 10px 0 0 0;
+    padding: 10px;
 }
 
 .clear-both {
