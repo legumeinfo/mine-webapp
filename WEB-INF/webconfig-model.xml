@@ -157,9 +157,9 @@
 
   <!-- has report displayer and widgets -->
   <class className="org.intermine.model.bio.Gene">
-    <bagdisplayers>
-      <displayer src="heatMap.tile" showOnLeft="true"/>
-    </bagdisplayers>
+    <!-- <bagdisplayers> -->
+    <!--   <displayer src="heatMap.tile" showOnLeft="true"/> -->
+    <!-- </bagdisplayers> -->
   </class>
 
   <!-- extends SequenceFeature; needed for bagdisplayer -->
@@ -626,8 +626,8 @@
   </reportdisplayers>
 
   <!-- ============================================================================================== -->
-  <!-- widgets -->
   <widgets>
+
     <graphdisplayer id="chromosome_distribution_for_gene"
                     title="Chromosome Distribution"
                     description="Actual: number of items in this list found on each chromosome.  Expected: given the total number of items on the chromosome and the number of items in this list, the number of items expected to be found on each chromosome."
@@ -642,7 +642,7 @@
                     seriesLabels="Actual,Expected"
                     seriesPath="ActualExpectedCriteria"
                     constraints="strain.identifier=[Strain]"
-                    views="primaryIdentifier, secondaryIdentifier, name, organism.name, chromosome.secondaryIdentifier, chromosomeLocation.start, chromosomeLocation.end, chromosomeLocation.strand"/>
+                    views="primaryIdentifier, name, organism.name, chromosome.name, chromosomeLocation.start, chromosomeLocation.end, chromosomeLocation.strand"/>
 
     <enrichmentwidgetdisplayer id="go_enrichment_for_gene"
                                title="Gene Ontology Enrichment"
@@ -658,7 +658,7 @@
                                constraints="ontologyAnnotations.ontologyTerm.ontology.name=Gene Ontology,
                                             ontologyAnnotations.ontologyTerm.namespace=[Namespace],
                                             organism.name=[list]"
-                               views="secondaryIdentifier,primaryIdentifier,organism.name,
+                               views="primaryIdentifier, name, organism.name,
                                       ontologyAnnotations.ontologyTerm.identifier, ontologyAnnotations.ontologyTerm.name"
                                externalLink="http://amigo.geneontology.org/amigo/term/"/>
 
@@ -667,24 +667,25 @@
                                description="Gene families enriched for genes in this list."
                                label="Gene Family"
                                startClass="Gene"
+                               typeClass="Gene"
                                startClassDisplay="primaryIdentifier"
                                enrich="geneFamilyAssignments.geneFamily.description"
                                enrichIdentifier="geneFamilyAssignments.geneFamily.primaryIdentifier"
                                constraints="organism.name=[list]"
-                               typeClass="Gene"
-                               views="secondaryIdentifier, organism.name, geneFamilyAssignments.geneFamily.description"/>
+                               views="primaryIdentifier, name, organism.name, geneFamilyAssignments.geneFamily.description"/>
 
     <enrichmentwidgetdisplayer id="pathway_enrichment"
                                title="Pathway Enrichment"
                                description="Pathways enriched for genes in this list."
                                label="Pathway"
                                startClass="Gene"
+                               typeClass="Gene"
                                startClassDisplay="primaryIdentifier"
                                enrich="pathways.name"
-                               enrichIdentifier="pathways.name"
+                               enrichIdentifier="pathways.primaryIdentifier"
                                constraints="organism.name=[list]"
-                               typeClass="Gene"
-                               views="secondaryIdentifier, organism.name, pathways.name"/>
+                               views="primaryIdentifier, name, organism.name, pathways.name"/>
+
   </widgets>
   
 
