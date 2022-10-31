@@ -51,6 +51,7 @@
     </fields>
   </class>
 
+  <!-- no annotationVersion -->
   <class className="org.intermine.model.bio.Chromosome">
     <fields>
       <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
@@ -62,6 +63,7 @@
     </fields>
   </class>
 
+  <!-- no annotationVersion -->
   <class className="org.intermine.model.bio.Supercontig">
     <fields>
       <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
@@ -80,33 +82,35 @@
     </fields>
   </class>
 
+  <!-- +bagdisplayer -->
   <class className="org.intermine.model.bio.CDS">
-    <fields>
-      <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
-      <fieldconfig fieldExpr="secondaryIdentifier" label="Short Identifier"/>
-      <fieldconfig fieldExpr="name" label="Name"/>
-      <fieldconfig fieldExpr="organism.name" label="Organism"/>
-      <fieldconfig fieldExpr="strain.identifier" label="Strain"/>
-      <fieldconfig fieldExpr="assemblyVersion" label="Assembly"/>
-      <fieldconfig fieldExpr="annotationVersion" label="Annotation"/>
-      <fieldconfig fieldExpr="length" displayer="/model/sequenceShortDisplayerWithField.jsp" showInInlineCollection="true" showInSummary="true"/>
-    </fields>
+    <!-- <fields> -->
+    <!--   <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/> -->
+    <!--   <fieldconfig fieldExpr="secondaryIdentifier" label="Short Identifier"/> -->
+    <!--   <fieldconfig fieldExpr="name" label="Name"/> -->
+    <!--   <fieldconfig fieldExpr="organism.name" label="Organism"/> -->
+    <!--   <fieldconfig fieldExpr="strain.identifier" label="Strain"/> -->
+    <!--   <fieldconfig fieldExpr="assemblyVersion" label="Assembly"/> -->
+    <!--   <fieldconfig fieldExpr="annotationVersion" label="Annotation"/> -->
+    <!--   <fieldconfig fieldExpr="length" displayer="/model/sequenceShortDisplayerWithField.jsp" showInInlineCollection="true" showInSummary="true"/> -->
+    <!-- </fields> -->
     <bagdisplayers>
       <displayer src="annotation.tile" showOnLeft="true"/>
     </bagdisplayers>
   </class>
 
+  <!-- +bagdisplayer -->
   <class className="org.intermine.model.bio.MRNA">
-    <fields>
-      <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
-      <fieldconfig fieldExpr="secondaryIdentifier" label="Short Identifier"/>
-      <fieldconfig fieldExpr="name" label="Name"/>
-      <fieldconfig fieldExpr="organism.name" label="Organism"/>
-      <fieldconfig fieldExpr="strain.identifier" label="Strain"/>
-      <fieldconfig fieldExpr="assemblyVersion" label="Assembly"/>
-      <fieldconfig fieldExpr="annotationVersion" label="Annotation"/>
-      <fieldconfig fieldExpr="length" displayer="/model/sequenceShortDisplayerWithField.jsp" showInInlineCollection="true" showInSummary="true"/>
-    </fields>
+    <!-- <fields> -->
+    <!--   <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/> -->
+    <!--   <fieldconfig fieldExpr="secondaryIdentifier" label="Short Identifier"/> -->
+    <!--   <fieldconfig fieldExpr="name" label="Name"/> -->
+    <!--   <fieldconfig fieldExpr="organism.name" label="Organism"/> -->
+    <!--   <fieldconfig fieldExpr="strain.identifier" label="Strain"/> -->
+    <!--   <fieldconfig fieldExpr="assemblyVersion" label="Assembly"/> -->
+    <!--   <fieldconfig fieldExpr="annotationVersion" label="Annotation"/> -->
+    <!--   <fieldconfig fieldExpr="length" displayer="/model/sequenceShortDisplayerWithField.jsp" showInInlineCollection="true" showInSummary="true"/> -->
+    <!-- </fields> -->
     <bagdisplayers>
       <displayer src="annotation.tile" showOnLeft="true"/>
     </bagdisplayers>
@@ -143,8 +147,8 @@
 
   <class className="org.intermine.model.bio.Location">
     <fields>
-      <fieldconfig fieldExpr="feature.secondaryIdentifier" label="Feature"/>
-      <fieldconfig fieldExpr="locatedOn.secondaryIdentifier" label="Located On"/>
+      <fieldconfig fieldExpr="feature.primaryIdentifier" label="Feature"/>
+      <fieldconfig fieldExpr="locatedOn.primaryIdentifier" label="Located On"/>
       <fieldconfig fieldExpr="start"/>
       <fieldconfig fieldExpr="end"/>
       <fieldconfig fieldExpr="strand"/>
@@ -187,18 +191,19 @@
     </fields>
   </class>
   
+  <!-- +bagdisplayer -->
   <class className="org.intermine.model.bio.Protein">
-    <fields>
-      <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
-      <fieldconfig fieldExpr="secondaryIdentifier" label="Short Identifier"/>
-      <fieldconfig fieldExpr="name" label="Name"/>
-      <fieldconfig fieldExpr="organism.name" label="Organism"/>
-      <fieldconfig fieldExpr="strain.identifier" label="Strain"/>
-      <fieldconfig fieldExpr="description" label="Description"/>
-      <fieldconfig fieldExpr="length" displayer="model/sequenceShortDisplayerWithField.jsp" showInInlineCollection="true" showInSummary="true"/>
-      <fieldconfig fieldExpr="assemblyVersion" label="Assembly"/>
-      <fieldconfig fieldExpr="annotationVersion" label="Annotation"/>
-    </fields>
+    <!-- <fields> -->
+    <!--   <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/> -->
+    <!--   <fieldconfig fieldExpr="secondaryIdentifier" label="Short Identifier"/> -->
+    <!--   <fieldconfig fieldExpr="name" label="Name"/> -->
+    <!--   <fieldconfig fieldExpr="organism.name" label="Organism"/> -->
+    <!--   <fieldconfig fieldExpr="strain.identifier" label="Strain"/> -->
+    <!--   <fieldconfig fieldExpr="description" label="Description"/> -->
+    <!--   <fieldconfig fieldExpr="length" displayer="model/sequenceShortDisplayerWithField.jsp" showInInlineCollection="true" showInSummary="true"/> -->
+    <!--   <fieldconfig fieldExpr="assemblyVersion" label="Assembly"/> -->
+    <!--   <fieldconfig fieldExpr="annotationVersion" label="Annotation"/> -->
+    <!-- </fields> -->
     <bagdisplayers>
       <displayer src="annotation.tile" showOnLeft="true"/>
     </bagdisplayers>
