@@ -358,6 +358,18 @@
     </fields>
   </class>
 
+  <class className="org.intermine.model.bio.Phylotree">
+    <headerconfig>
+      <titles>
+        <title mainTitles="geneFamily.description" numberOfMainTitlesToShow="1"/>
+      </titles>
+    </headerconfig>
+    <fields>
+      <fieldconfig fieldExpr="geneFamily.description" label="Gene Family" doNotTruncate="true"/>
+      <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
+    </fields>
+  </class>
+
   <class className="org.intermine.model.bio.Pathway">
     <headerconfig>
       <titles>
