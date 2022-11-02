@@ -150,11 +150,11 @@
     </fields>
   </class>
 
-  <!-- has report displayer and widgets -->
+  <!-- +bagdisplayer -->
   <class className="org.intermine.model.bio.Gene">
-    <!-- <bagdisplayers> -->
-    <!--   <displayer src="heatMap.tile" showOnLeft="true"/> -->
-    <!-- </bagdisplayers> -->
+    <bagdisplayers>
+      <displayer src="heatMap.tile" showOnLeft="true"/>
+    </bagdisplayers>
   </class>
 
   <!-- extends SequenceFeature; needed for bagdisplayer -->
