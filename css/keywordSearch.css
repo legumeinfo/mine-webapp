@@ -68,6 +68,7 @@
 
 .keywordSearchResult .objectFieldName {
     font-style: italic;
+    vertical-align: top;
 }
 
 .keywordSearchResults .facets {
