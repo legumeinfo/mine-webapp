@@ -112,9 +112,8 @@ li {
 }
 
 #header h1, #header h1 a:link, #header h1 a:visited {
-    margin: 0px;
     padding: 0px;
-    margin-top: 5px;
+    margin-top: 6px;
     color: #FFF;
     font-size: 1.4em;
     font-weight: bold;
@@ -130,7 +129,7 @@ li {
 }
 
 p#version {
-    font-size: 12px;
+    font-size: 14px;
     color: #333;
     font-weight: bold;
     float: left;
