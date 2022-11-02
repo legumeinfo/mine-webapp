@@ -27,7 +27,8 @@
     <fields>
       <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
       <fieldconfig fieldExpr="secondaryIdentifier" label="Short Identifier"/>
-      <fieldconfig fieldExpr="name" label="Name"/>
+      <fieldconfig fieldExpr="name"/>
+      <fieldconfig fieldExpr="description"/>
       <fieldconfig fieldExpr="organism.name" label="Organism"/>
       <fieldconfig fieldExpr="strain.identifier" label="Strain"/>
     </fields>
