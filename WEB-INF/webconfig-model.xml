@@ -45,7 +45,7 @@
       <fieldconfig fieldExpr="description"/>
       <fieldconfig fieldExpr="organism.name" label="Organism"/>
       <fieldconfig fieldExpr="strain.identifier" label="Strain"/>
-      <fieldconfig fieldExpr="length" displayer="/model/sequenceShortDisplayerWithField.jsp" showInInlineCollection="true" showInSummary="true"/>
+      <fieldconfig fieldExpr="length" displayer="model/sequenceShortDisplayerWithField.jsp" showInInlineCollection="true" showInSummary="true"/>
     </fields>
   </class>
 
@@ -62,7 +62,7 @@
       <fieldconfig fieldExpr="organism.name" label="Organism"/>
       <fieldconfig fieldExpr="strain.identifier" label="Strain"/>
       <fieldconfig fieldExpr="assemblyVersion" label="Assembly"/>
-      <fieldconfig fieldExpr="length" displayer="/model/sequenceShortDisplayerWithField.jsp"/>
+      <fieldconfig fieldExpr="length" displayer="model/sequenceShortDisplayerWithField.jsp"/>
     </fields>
   </class>
 
@@ -79,7 +79,7 @@
       <fieldconfig fieldExpr="organism.name" label="Organism"/>
       <fieldconfig fieldExpr="strain.identifier" label="Strain"/>
       <fieldconfig fieldExpr="assemblyVersion" label="Assembly"/>
-      <fieldconfig fieldExpr="length" displayer="/model/sequenceShortDisplayerWithField.jsp"/>
+      <fieldconfig fieldExpr="length" displayer="model/sequenceShortDisplayerWithField.jsp"/>
     </fields>
   </class>
   
@@ -104,8 +104,16 @@
     </bagdisplayers>
   </class>
 
-  <!-- +bagdisplayer -->
+  <!-- +length +bagdisplayer -->
   <class className="org.intermine.model.bio.Protein">
+    <fields>
+      <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
+      <fieldconfig fieldExpr="name" label="Name"/>
+      <fieldconfig fieldExpr="description"/>
+      <fieldconfig fieldExpr="organism.name" label="Organism"/>
+      <fieldconfig fieldExpr="strain.identifier" label="Strain"/>
+      <fieldconfig fieldExpr="length"/>
+    </fields>
     <bagdisplayers>
       <displayer src="annotation.tile" showOnLeft="true"/>
     </bagdisplayers>
@@ -580,7 +588,13 @@
                      replacesFields=""
                      placement="summary"
                      types="QTLStudy"/>
-    
+
+    <reportdisplayer javaClass="org.intermine.bio.web.displayer.ProteinSequenceDisplayer"
+                     jspName="model/proteinSequenceDisplayer.jsp"
+                     replacesFields="length,sequence"
+                     placement="summary"
+                     types="Protein"/> 
+
     <!-- <reportdisplayer javaClass="org.ncgr.intermine.bio.web.displayer.PhylotreeDisplayer" -->
     <!--                  jspName="model/phylotreeDisplayer.jsp" -->
     <!--                  replacesFields="" -->
