@@ -36,43 +36,79 @@ for (int i=0; i<sampleCounts.length; i++) {
 <c:set var="height" value="${WEB_PROPERTIES['heatmap.height']}"/>
 <c:set var="width" value="${WEB_PROPERTIES['heatmap.width']}"/>
 
+<div id="divToggle" style="clear:both; padding-left:10px; font-weight:bold; background-color:gray; color:white; border:1px solid white; margin-top:10px;">
+    Click here to toggle visibility of the expression heat map(s).
+</div>
+<div id="bigDiv" style="border:1px solid gray; padding:0 0 10px 10px;">
+    <div style="padding:5px 0">
+        <select id="expSelect" onChange="setExpressionSet(document.getElementById('expSelect').value)">
+            <option value="-1">--- Select an expression study to see a heat map for these genes</h3> ---</option>
+            <% for (int i=0; i<sources.length; i++) { %>
+                <option value="<%=i%>"><%=sources[i]%>: <%=sampleCounts[i]%> samples, <%=geneCounts[i]%> genes</option>
+            <% } %>
+        </select>
+    </div>
+    <h3 id="sourceHeading"></h3>
+    <div id="sourceSynopsis" style="font-weight:bold"></div>
+    <div id="sourceUnit"></div>
+    <canvas id="canvasx" width="${width}" height="${height}"></canvas>
+    <div style="width:400px; margin:5px auto; text-align:center; padding:5px; background-color:lightgray;">
+        <p id="geneClusteringBlurb" style="font-style:italic"></p>
+        <p id="sampleClusteringBlurb" style="font-style:italic"></p>
+        Gene K-means:
+        <select id="smps-km">
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        Sample K-means:
+        <select id="vars-km">
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+</div>
+
 <script type="text/javascript">
  // constants
- var min_cluster = 5;
- var width_per_sample = 50;
- var height_per_gene = 50;
+ const min_cluster = 5;
+ const width_per_sample = 50;
+ const height_per_gene = 50;
 
  // HTTP request objects
- var expressionJSON = ${expressionJSON};
- var sourcesJSON = ${sourcesJSON};
- var descriptionsJSON = ${descriptionsJSON};
- var namesJSON = ${namesJSON};
- var geneCounts = ${geneCounts};
- var sampleCounts = ${sampleCounts};
+ const expressionJSON = ${expressionJSON};
+ const sourcesJSON = ${sourcesJSON};
+ const descriptionsJSON = ${descriptionsJSON};
+ const namesJSON = ${namesJSON};
+ const geneCounts = ${geneCounts};
+ const sampleCounts = ${sampleCounts};
  
  // web.properties settings
- var showOverlays = ${WEB_PROPERTIES['heatmap.showOverlays']};
- var smpLabelScaleFontFactor = ${WEB_PROPERTIES['heatmap.smpLabelScaleFontFactor']};
- var smpLabelFontStyle = "${WEB_PROPERTIES['heatmap.smpLabelFontStyle']}";
- var smpLabelFontColor = "${WEB_PROPERTIES['heatmap.smpLabelFontColor']}";
- var varLabelScaleFontFactor = ${WEB_PROPERTIES['heatmap.varLabelScaleFontFactor']};
- var varLabelFontStyle = "${WEB_PROPERTIES['heatmap.varLabelFontStyle']}";
- var varLabelFontColor = "${WEB_PROPERTIES['heatmap.varLabelFontColor']}";
- var varLabelRotate = ${WEB_PROPERTIES['heatmap.varLabelRotate']};
- var varTitle = "Mouse over sample for description";
- var heatmapIndicatorPosition = "top";
- var heatmapIndicatorHistogram = ${WEB_PROPERTIES['heatmap.heatmapIndicatorHistogram']};
- var heatmapIndicatorHeight = ${WEB_PROPERTIES['heatmap.heatmapIndicatorHeight']};
- var heatmapIndicatorWidth = ${WEB_PROPERTIES['heatmap.heatmapIndicatorWidth']};
+ const showOverlays = ${WEB_PROPERTIES['heatmap.showOverlays']};
+ const smpLabelScaleFontFactor = ${WEB_PROPERTIES['heatmap.smpLabelScaleFontFactor']};
+ const smpLabelFontStyle = "${WEB_PROPERTIES['heatmap.smpLabelFontStyle']}";
+ const smpLabelFontColor = "${WEB_PROPERTIES['heatmap.smpLabelFontColor']}";
+ const varLabelScaleFontFactor = ${WEB_PROPERTIES['heatmap.varLabelScaleFontFactor']};
+ const varLabelFontStyle = "${WEB_PROPERTIES['heatmap.varLabelFontStyle']}";
+ const varLabelFontColor = "${WEB_PROPERTIES['heatmap.varLabelFontColor']}";
+ const varLabelRotate = ${WEB_PROPERTIES['heatmap.varLabelRotate']};
+ const varTitle = "Mouse over sample for description";
+ const heatmapIndicatorPosition = "top";
+ const heatmapIndicatorHistogram = ${WEB_PROPERTIES['heatmap.heatmapIndicatorHistogram']};
+ const heatmapIndicatorHeight = ${WEB_PROPERTIES['heatmap.heatmapIndicatorHeight']};
+ const heatmapIndicatorWidth = ${WEB_PROPERTIES['heatmap.heatmapIndicatorWidth']};
 
  // the map of gene secondaryIdentifier -> primaryIdentifier for gene links
- var genePrimaryIDMap = new Map();
+ const genePrimaryIDMap = new Map();
  <% for (String key : genePrimaryIDMap.keySet()) { %>
  genePrimaryIDMap.set('<%=key%>', '<%=genePrimaryIDMap.get(key)%>');
  <% } %>
  
  // the (static) CanvasXpress configuration
- var conf = {
+ const conf = {
      "graphType": "Heatmap",
      "xAxisTitle": "",
      "canvasBox": false,
@@ -111,18 +147,54 @@ for (int i=0; i<sampleCounts.length; i++) {
          "PCorr"
      ]
  }
- 
+
  // dynamically refresh the heatmap with the indicated expression set
  function setExpressionSet(index) {
+     if (index == -1) return;
      // grab the source metadata and expression data
-     var source = sourcesJSON[index];
-     var data = expressionJSON[index];
-     var descriptions = descriptionsJSON[index];
-     var names = namesJSON[index];
-     var samplesKmeaned = (geneCounts[index]>=min_cluster);
-     var variablesKmeaned = (sampleCounts[index]>=min_cluster);
+     const source = sourcesJSON[index];
+     const data = expressionJSON[index];
+     const descriptions = descriptionsJSON[index];
+     const names = namesJSON[index];
+     const samplesKmeaned = (geneCounts[index]>=min_cluster);
+     const variablesKmeaned = (sampleCounts[index]>=min_cluster);
+
+     // the CanvasXpress event handlers - depends on names, source, descriptions
+     // 
+     // NOTE: do not put comments inside functions!
+     // NOTE: gene click link generates a FAIR URI using the Gene.primaryIdentifier.
+     // Example: window.open("/medicmine/gene:medtr.R108.gnm1.ann1.Medtr0002s0420");
+     const evts = {
+         "mousemove": function(o, e, t) {
+             if (o.y.vars.length==1 && o.y.smps.length==1) {
+                 const value = o.y.data[0][0]+" "+source.unit;
+                 t.showInfoSpan(e, value);
+             } else if (o.y.vars.length==1) {
+                 const sample = o.y.vars[0];
+                 const s = names[sample] + ":" + descriptions[sample];
+                 t.showInfoSpan(e, s);
+             } else if (o.y.smps.length==1) {
+                 const gene = o.y.smps[0];
+                 const url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+genePrimaryIDMap.get(gene);
+                 t.showInfoSpan(e, "go to "+gene+" gene page");
+             }
+         },
+         "mouseout": function(o, e, t) {
+         },
+         "click": function(o, e, t) {
+             if (o.y.smps.length==1) {
+                 const gene = o.y.smps[0];
+                 const url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+genePrimaryIDMap.get(gene);
+                 window.open(url);
+             }
+         },
+         "dblclick": function(o, e, t) {
+         }
+     }
+
      // update the blurbs
      document.getElementById('sourceHeading').innerHTML = '<a href="report.do?id='+source.id+'">'+source.primaryIdentifier+'</a>';
+     document.getElementById('sourceSynopsis').innerHTML = source.synopsis;
      document.getElementById('sourceUnit').innerHTML = 'Expression unit: '+source.unit;
      if (showOverlays) {
          document.getElementById('sourceUnit').innerHTML += '; PCorr = mean Pearson correlation between that gene and the others.';
@@ -137,45 +209,15 @@ for (int i=0; i<sampleCounts.length; i++) {
      } else {
          document.getElementById('sampleClusteringBlurb').innerHTML = 'Sample clustering is not available for fewer than '+min_cluster+' samples.';
      }
-     // the CanvasXpress event handlers
-     // 
-     // NOTE: do not put comments inside functions!
-     // NOTE: gene click link generates a FAIR URI using the Gene.primaryIdentifier.
-     // Example: window.open("/medicmine/gene:medtr.R108.gnm1.ann1.Medtr0002s0420");
-     var evts = {
-	 "mousemove": function(o, e, t) {
-             if (o.y.vars.length==1 && o.y.smps.length==1) {
-                 var value = o.y.data[0][0]+" "+source.unit;
-                 t.showInfoSpan(e, value);
-             } else if (o.y.vars.length==1) {
-                 var sample = o.y.vars[0];
-                 var s = names[sample] + ":" + descriptions[sample];
-                 t.showInfoSpan(e, s);
-             } else if (o.y.smps.length==1) {
-                 var gene = o.y.smps[0];
-                 var url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+genePrimaryIDMap.get(gene);
-                 t.showInfoSpan(e, "go to "+gene+" gene page");
-             }
-	 },
-         "mouseout": function(o, e, t) {
-         },
-         "click": function(o, e, t) {
-             if (o.y.smps.length==1) {
-                 var gene = o.y.smps[0];
-                 var url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+genePrimaryIDMap.get(gene);
-                 window.open(url);
-             }
-         },
-         "dblclick": function(o, e, t) {
-         }
-     }
+
      // create/update the CanvasXpress object
-     var cx = CanvasXpress.$('canvasx');
+     const cx = CanvasXpress.$('canvasx');
      if (cx==null) {
          // first one
          cx = new CanvasXpress('canvasx', data, conf, evts);
      } else {
          // replace the data
+         cx.updateData(data);
          cx.updateData(data);
          // update the k-means back to default
          cx.kmeansSmpClusters = 2;
@@ -183,6 +225,7 @@ for (int i=0; i<sampleCounts.length; i++) {
          jQuery("#smps-km").val("2");
          jQuery("#vars-km").val("2");
      }
+
      // show k-means on features if enabled
      if (samplesKmeaned) {
          cx.kmeansSamples(true);
@@ -214,54 +257,10 @@ for (int i=0; i<sampleCounts.length; i++) {
          }
      );
  }
-</script>
 
-<div id="divToggle" style="clear:both; padding-left:10px; font-weight:bold; background-color:gray; color:white; border:1px solid white; margin-top:10px;">
-    Click here to toggle visibility of the expression heat map(s).
-</div>
-
-<div id="bigDiv" style="border:1px solid gray; padding:0 0 10px 10px;">
-
-    <div style="padding:5px 0">
-        <h3>Select an expression set heat map for these genes:</h3>
-        <select id="expSelect" onChange="setExpressionSet(document.getElementById('expSelect').selectedIndex);">
-            <% for (int i=0; i<sources.length; i++) { %>
-                <option <% if (i==0) out.print("selected"); %> ><%=sources[i]%>: <%=sampleCounts[i]%> samples, <%=geneCounts[i]%> genes</option>
-            <% } %>
-        </select>
-    </div>
-
-    <h3 id="sourceHeading"></h3>
-    <div style="color:black;" id="sourceUnit"></div>
-    
-    <canvas id="canvasx" width="${width}" height="${height}"></canvas>
-    <div style="width:400px; margin:5px auto; text-align:center; padding:5px; background-color:lightgray;">
-        <p id="geneClusteringBlurb" style="font-style:italic"></p>
-        <p id="sampleClusteringBlurb" style="font-style:italic"></p>
-        Gene K-means:
-        <select id="smps-km">
-            <option value="2" selected>2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-        Sample K-means:
-        <select id="vars-km">
-            <option value="2" selected>2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-    </div>
-</div>
-
-<script type="text/javascript">
- // initialize the canvas with the first expression set
- setExpressionSet(0);
- 
  // big div visibility toggle
  jQuery("#divToggle").click(function () {
      jQuery("#bigDiv").toggle("slow");
- } );
+ });
 </script>
 <!-- /heatMap.jsp -->
