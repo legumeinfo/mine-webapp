@@ -423,13 +423,16 @@
   <class className="org.intermine.model.bio.QTL">
     <headerconfig>
       <titles>
-        <title mainTitles="identifier" numberOfMainTitlesToShow="1" subTitles="linkageGroup.identifier"/>
+        <title mainTitles="identifier" numberOfMainTitlesToShow="1" />
       </titles>
     </headerconfig>
     <fields>
-      <fieldconfig fieldExpr="identifier" label="Identifier"/>
+      <fieldconfig fieldExpr="identifier"/>
       <fieldconfig fieldExpr="trait.name" label="Trait"/>
+      <fieldconfig fieldExpr="linkageGroup.geneticMap.primaryIdentifier" label="Genetic Map"/>
       <fieldconfig fieldExpr="linkageGroup.identifier" label="Linkage Group"/>
+      <fieldconfig fieldExpr="start" />
+      <fieldconfig fieldExpr="end" />
       <fieldconfig fieldExpr="qtlStudy.primaryIdentifier" label="QTL Study"/>
     </fields>
   </class>
