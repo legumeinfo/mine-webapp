@@ -19,7 +19,10 @@
      "smpTitleFontStyle": "italic",
      "smpTitleScaleFontFactor": 0.5,
      "smpTitle": "Mouse over bar for full sample description",
-     "showLegend": false
+     "showLegend": true,
+     "legendPosition": "right",
+     "colorScheme": "CanvasXpress",
+     "colorBy": "repgroup"
  }
 </script>
 
