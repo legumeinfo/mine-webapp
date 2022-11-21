@@ -19,7 +19,6 @@
      "smpTitleFontStyle": "italic",
      "smpTitleScaleFontFactor": 0.5,
      "smpTitle": "Mouse over bar for full sample description",
-     "showLegend": true,
      "legendPosition": "right",
      "colorScheme": "CanvasXpress",
      "colorBy": "repgroup"
@@ -50,7 +49,7 @@
      
      // the data for this source - global scope required
      const data = ${jsonList[index]};
-     
+
      // the CanvasXpress event handlers - global scope required
      const evts = {
          mousemove: function(o, e, t) {
@@ -67,6 +66,9 @@
              t.showInfoSpan(e, s);
          }
      }
+
+     // show legend if we have rep groups
+     conf["showLegend"] = Object.keys(data.x).length > 0;
 
      // put this source's expression unit on the x axis
      conf["xAxisTitle"] = "${unitsList[index]}";
