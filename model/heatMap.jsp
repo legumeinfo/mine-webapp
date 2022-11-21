@@ -12,11 +12,13 @@ java.util.List<Integer> geneCountsList = (java.util.List<Integer>) request.getAt
 java.util.List<Integer> sampleCountsList = (java.util.List<Integer>) request.getAttribute("sampleCounts");
 java.util.Map<String,String> genePrimaryIDMap = (java.util.Map<String,String>) request.getAttribute("genePrimaryIDMap");
 
-if (errorMessage==null) {
-    out.print("<h2>errorMessage is null!</h2>");
-    return;
-} else if (errorMessage.length()>0) {
+if (errorMessage!=null && errorMessage.length()>0) {
     out.print("<code>"+errorMessage+"</code>");
+    return;
+}
+
+// no expression
+if (sourceList==null || sourceList.size()==0) {
     return;
 }
 
