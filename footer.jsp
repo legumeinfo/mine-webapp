@@ -44,11 +44,11 @@
 
   <!-- LIS/LegFed mines -->
   <div style="align:center; padding:5px;">
-    <a href="/beanmine/begin.do" target="_blank">BeanMine</a> |
-    <a href="/chickpeamine/begin.do" target="_blank">ChickpeaMine</a> |
-    <a href="/cowpeamine/begin.do" target="_blank">CowpeaMine</a> |
+    <a href="/phaseolusmine/begin.do" target="_blank">PhaseolusMine</a> |
+    <a href="/cicermine/begin.do" target="_blank">CicerMine</a> |
+    <a href="/vignamine/begin.do" target="_blank">VignaMine</a> |
     <a href="/lupinmine/begin.do" target="_blank">LupinMine</a> |    
-    <a href="/peanutmine/begin.do" target="_blank">PeanutMine</a> |
+    <a href="/arachismine/begin.do" target="_blank">ArachisMine</a> |
     <a href="/soymine/begin.do" target="_blank">SoyMine</a> |
     <a href="/medicmine/begin.do" target="_blank">MedicMine</a> |
     <a href="/legumemine/begin.do" target="_blank">LegumeMine</a>
