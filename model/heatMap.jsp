@@ -5,56 +5,58 @@
 <html:xhtml />
 <tiles:importAttribute />
 <%
+// bail on error
+if (request.getAttribute("errorMessage")!=null) {
+    out.print("<code>"+request.getAttribute("errorMessage")+"</code>");
+    return;
+}
+
 // server-side variables
-String errorMessage = (String) request.getAttribute("errorMessage");
 java.util.List<String> sourceList = (java.util.List<String>) request.getAttribute("sources");
 java.util.List<Integer> geneCountsList = (java.util.List<Integer>) request.getAttribute("geneCounts");
 java.util.List<Integer> sampleCountsList = (java.util.List<Integer>) request.getAttribute("sampleCounts");
 java.util.Map<String,String> genePrimaryIDMap = (java.util.Map<String,String>) request.getAttribute("genePrimaryIDMap");
-
-if (errorMessage!=null && errorMessage.length()>0) {
-    out.print("<code>"+errorMessage+"</code>");
-    return;
-}
+java.util.Map<String,String> geneDescriptionMap = (java.util.Map<String,String>) request.getAttribute("geneDescriptionMap");
 
 // no expression
 if (sourceList==null || sourceList.size()==0) {
     return;
 }
 
+// have to cast from Object below
 String[] sources = new String[sourceList.size()];
 for (int i=0; i<sources.length; i++) {
-    sources[i] = sourceList.get(i);    
+    sources[i] = (String) sourceList.get(i);    
 }
 int[] geneCounts = new int[geneCountsList.size()]; // they better be the same!
 for (int i=0; i<geneCounts.length; i++) {
-    geneCounts[i] = geneCountsList.get(i);
+    geneCounts[i] = (int) geneCountsList.get(i);
 }
 int[] sampleCounts = new int[sampleCountsList.size()]; // also should be the same!
 for (int i=0; i<sampleCounts.length; i++) {
-    sampleCounts[i] = sampleCountsList.get(i);
+    sampleCounts[i] = (int) sampleCountsList.get(i);
 }
 %>
-<c:set var="height" value="${WEB_PROPERTIES['heatmap.height']}"/>
-<c:set var="width" value="${WEB_PROPERTIES['heatmap.width']}"/>
 
-<div id="divToggle" style="clear:both; padding-left:10px; font-weight:bold; background-color:gray; color:white; border:1px solid white; margin-top:10px;">
+<div id="divToggle" style="clear:both; padding:10px; font-weight:bold; background-color:gray; color:white; border:1px solid white; margin-top:10px;">
     Click here to toggle visibility of the expression heat map(s).
 </div>
-<div id="bigDiv" style="border:1px solid gray; padding:0 0 10px 10px;">
-    <div style="padding:5px 0">
-        <select id="expSelect" onChange="setExpressionSet(document.getElementById('expSelect').value)">
-            <option value="-1">--- Select an expression study to see a heat map for these genes</h3> ---</option>
-            <% for (int i=0; i<sources.length; i++) { %>
-                <option value="<%=i%>"><%=sources[i]%>: <%=sampleCounts[i]%> samples, <%=geneCounts[i]%> genes</option>
-            <% } %>
-        </select>
-    </div>
+<div id="bigDiv">
+    <% if (sources.length>1) { %>
+        <div style="padding:5px 0">
+            <select id="expSelect" onChange="setExpressionSet(document.getElementById('expSelect').value)">
+                <option value="-1">--- Select an expression study to see a heat map for these genes</h3> ---</option>
+                <% for (int i=0; i<sources.length; i++) { %>
+                    <option value="<%=i%>"><%=sources[i]%>: <%=sampleCounts[i]%> samples, <%=geneCounts[i]%> genes</option>
+                <% } %>
+            </select>
+        </div>
+    <% } %>
     <h3 id="sourceHeading"></h3>
     <div id="sourceSynopsis" style="font-weight:bold"></div>
     <div id="sourceUnit"></div>
-    <canvas id="canvasx" width="${width}" height="${height}"></canvas>
-    <div style="width:400px; margin:5px auto; text-align:center; padding:5px; background-color:lightgray;">
+    <canvas id="canvasx" width="${WEB_PROPERTIES['heatmap.width']}" height="${WEB_PROPERTIES['heatmap.height']}"></canvas>
+    <div style="width:400px; margin:10px auto; text-align:center; padding:10px; background-color:lightgray;">
         <p id="geneClusteringBlurb" style="font-style:italic"></p>
         <p id="sampleClusteringBlurb" style="font-style:italic"></p>
         Gene K-means:
@@ -84,70 +86,61 @@ for (int i=0; i<sampleCounts.length; i++) {
  const expressionJSON = ${expressionJSON};
  const sourcesJSON = ${sourcesJSON};
  const descriptionsJSON = ${descriptionsJSON};
- const namesJSON = ${namesJSON};
  const geneCounts = ${geneCounts};
  const sampleCounts = ${sampleCounts};
  
  // web.properties settings
- const showOverlays = ${WEB_PROPERTIES['heatmap.showOverlays']};
- const smpLabelScaleFontFactor = ${WEB_PROPERTIES['heatmap.smpLabelScaleFontFactor']};
- const smpLabelFontStyle = "${WEB_PROPERTIES['heatmap.smpLabelFontStyle']}";
- const smpLabelFontColor = "${WEB_PROPERTIES['heatmap.smpLabelFontColor']}";
- const varLabelScaleFontFactor = ${WEB_PROPERTIES['heatmap.varLabelScaleFontFactor']};
- const varLabelFontStyle = "${WEB_PROPERTIES['heatmap.varLabelFontStyle']}";
- const varLabelFontColor = "${WEB_PROPERTIES['heatmap.varLabelFontColor']}";
- const varLabelRotate = ${WEB_PROPERTIES['heatmap.varLabelRotate']};
- const varTitle = "Mouse over sample for description";
- const heatmapIndicatorPosition = "top";
- const heatmapIndicatorHistogram = ${WEB_PROPERTIES['heatmap.heatmapIndicatorHistogram']};
  const heatmapIndicatorHeight = ${WEB_PROPERTIES['heatmap.heatmapIndicatorHeight']};
  const heatmapIndicatorWidth = ${WEB_PROPERTIES['heatmap.heatmapIndicatorWidth']};
-
- // the map of gene secondaryIdentifier -> primaryIdentifier for gene links
+ const varLabelScaleFontFactor = ${WEB_PROPERTIES['heatmap.varLabelScaleFontFactor']};
+ const varLabelFontColor = "${WEB_PROPERTIES['heatmap.varLabelFontColor']}";
+ const varLabelFontStyle = "${WEB_PROPERTIES['heatmap.varLabelFontStyle']}";
+ const varLabelRotate = ${WEB_PROPERTIES['heatmap.varLabelRotate']};
+ const varTitleScaleFontFactor = ${WEB_PROPERTIES['heatmap.varTitleScaleFontFactor']};
+ const smpLabelScaleFontFactor = ${WEB_PROPERTIES['heatmap.smpLabelScaleFontFactor']};
+ const smpLabelFontColor = "${WEB_PROPERTIES['heatmap.smpLabelFontColor']}";
+ const smpLabelFontStyle = "${WEB_PROPERTIES['heatmap.smpLabelFontStyle']}";
+ const smpLabelRotate = "${WEB_PROPERTIES['heatmap.smpLabelRotate']}";
+ const smpTitleScaleFontFactor = ${WEB_PROPERTIES['heatmap.smpTitleScaleFontFactor']};
+ 
+ // the maps of gene name -> primaryIdentifier, description for gene links
  const genePrimaryIDMap = new Map();
+ const geneDescriptionMap = new Map();
  <% for (String key : genePrimaryIDMap.keySet()) { %>
  genePrimaryIDMap.set('<%=key%>', '<%=genePrimaryIDMap.get(key)%>');
+ geneDescriptionMap.set('<%=key%>', '<%=geneDescriptionMap.get(key)%>');
  <% } %>
  
  // the (static) CanvasXpress configuration
  const conf = {
-     "graphType": "Heatmap",
-     "xAxisTitle": "",
-     "canvasBox": false,
-     "showHeatMapIndicator": true,
-     "heatmapCellBox": true,
-     "heatmapIndicatorPosition": heatmapIndicatorPosition,
-     "heatmapIndicatorHistogram": heatmapIndicatorHistogram,
-     "heatmapIndicatorHeight": heatmapIndicatorHeight,
-     "heatmapIndicatorWidth": heatmapIndicatorWidth,
-     "smpLabelScaleFontFactor": smpLabelScaleFontFactor,
-     "smpLabelFontStyle": smpLabelFontStyle,
-     "smpLabelFontColor": smpLabelFontColor,
-     "varLabelScaleFontFactor": varLabelScaleFontFactor,
-     "varLabelFontStyle": varLabelFontStyle,
-     "varLabelFontColor": varLabelFontColor,
-     "varLabelRotate": varLabelRotate,
-     "varTitle": varTitle,
-     "kmeansSmpClusters": 2,
-     "kmeansVarClusters": 2,
-     "linkage": "complete",
-     "samplesClustered": false,
-     "variablesClustered": false,
-     "showSmpDendrogram": false,
-     "showVarDendrogram": false,
-     "showOverlays": showOverlays,
-     "smpOverlayProperties": {
-         "PCorr": {
-             "thickness": 50,
-             "position": "right",
-             "type": "Dotplot",
-             "color": "blue",
-             "scheme": "User"
-         }
-     },
-     "smpOverlays": [
-         "PCorr"
-     ]
+     'graphType': 'Heatmap',
+     'varTitle': 'Mouse over sample for description.',
+     'smpTitle': 'Mouse over gene for description; click to go to gene page.',
+     'xAxisTitle': '',
+     'canvasBox': true,
+     'showHeatMapIndicator': true,
+     'heatmapCellBox': true,
+     'heatmapIndicatorPosition': 'top',
+     'heatmapIndicatorHistogram': false,
+     'heatmapIndicatorHeight': heatmapIndicatorHeight,
+     'heatmapIndicatorWidth': heatmapIndicatorWidth,
+     'varLabelScaleFontFactor': varLabelScaleFontFactor,
+     'varLabelFontColor': varLabelFontColor,
+     'varLabelFontStyle': varLabelFontStyle,
+     'varLabelRotate': varLabelRotate,
+     'varTitleScaleFontFactor': varTitleScaleFontFactor,
+     'smpLabelScaleFontFactor': smpLabelScaleFontFactor,
+     'smpLabelFontColor': smpLabelFontColor,
+     'smpLabelFontStyle': smpLabelFontStyle,
+     'smpLabelRotate': smpLabelRotate,
+     'smpTitleScaleFontFactor': smpTitleScaleFontFactor,
+     'kmeansSmpClusters': 2,
+     'kmeansVarClusters': 2,
+     'linkage': 'complete',
+     'samplesClustered': true,
+     'variablesClustered': true,
+     'showSmpDendrogram': false,
+     'showVarDendrogram': false,
  }
 
  // dynamically refresh the heatmap with the indicated expression set
@@ -157,7 +150,6 @@ for (int i=0; i<sampleCounts.length; i++) {
      const source = sourcesJSON[index];
      const data = expressionJSON[index];
      const descriptions = descriptionsJSON[index];
-     const names = namesJSON[index];
      const samplesKmeaned = (geneCounts[index]>=min_cluster);
      const variablesKmeaned = (sampleCounts[index]>=min_cluster);
 
@@ -168,23 +160,24 @@ for (int i=0; i<sampleCounts.length; i++) {
      // Example: window.open("/medicmine/gene:medtr.R108.gnm1.ann1.Medtr0002s0420");
      const evts = {
          "mousemove": function(o, e, t) {
-             if (o.y.vars.length==1 && o.y.smps.length==1) {
+             if (o.y && o.y.vars.length==1 && o.y.smps.length==1) {
                  const value = o.y.data[0][0]+" "+source.unit;
                  t.showInfoSpan(e, value);
-             } else if (o.y.vars.length==1) {
+             } else if (o.y && o.y.vars.length==1) {
                  const sample = o.y.vars[0];
-                 const s = names[sample] + ":" + descriptions[sample];
+                 const s = descriptions[sample];
                  t.showInfoSpan(e, s);
-             } else if (o.y.smps.length==1) {
+             } else if (o.y && o.y.smps.length==1) {
                  const gene = o.y.smps[0];
-                 const url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+genePrimaryIDMap.get(gene);
-                 t.showInfoSpan(e, "go to "+gene+" gene page");
+                 // const url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+genePrimaryIDMap.get(gene);
+                 // t.showInfoSpan(e, "go to "+gene+" gene page");
+                 t.showInfoSpan(e, geneDescriptionMap.get(gene));
              }
          },
          "mouseout": function(o, e, t) {
          },
          "click": function(o, e, t) {
-             if (o.y.smps.length==1) {
+             if (o.y && o.y.smps.length==1) {
                  const gene = o.y.smps[0];
                  const url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+genePrimaryIDMap.get(gene);
                  window.open(url);
@@ -198,9 +191,6 @@ for (int i=0; i<sampleCounts.length; i++) {
      document.getElementById('sourceHeading').innerHTML = '<a href="report.do?id='+source.id+'">'+source.primaryIdentifier+'</a>';
      document.getElementById('sourceSynopsis').innerHTML = source.synopsis;
      document.getElementById('sourceUnit').innerHTML = 'Expression unit: '+source.unit;
-     if (showOverlays) {
-         document.getElementById('sourceUnit').innerHTML += '; PCorr = mean Pearson correlation between that gene and the others.';
-     }
      if (samplesKmeaned) {
          document.getElementById('geneClusteringBlurb').innerHTML = '';
      } else {
@@ -213,7 +203,7 @@ for (int i=0; i<sampleCounts.length; i++) {
      }
 
      // create/update the CanvasXpress object
-     const cx = CanvasXpress.$('canvasx');
+     let cx = CanvasXpress.$('canvasx');
      if (cx==null) {
          // first one
          cx = new CanvasXpress('canvasx', data, conf, evts);
@@ -265,4 +255,12 @@ for (int i=0; i<sampleCounts.length; i++) {
      jQuery("#bigDiv").toggle("slow");
  });
 </script>
+
+<% if (sources.length==1) { %>
+    <!-- force single heatmap without selector -->
+    <script type="text/javascript">
+     setExpressionSet(0);
+    </script>
+<% } %>
+
 <!-- /heatMap.jsp -->
