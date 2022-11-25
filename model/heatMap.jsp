@@ -54,6 +54,7 @@ if (sourceList==null || sourceList.size()==0) {
         });
     </script>
 <% } %>
+
 <script type="text/javascript">
  // constants
  const min_cluster = 5;
@@ -103,10 +104,8 @@ if (sourceList==null || sourceList.size()==0) {
      'showSmpDendrogram': false,
      'showVarDendrogram': false,
  }
-</script>
-<script type="text/javascript">
+
  for (var index=0; index<sourcesJSON.length; index++) {
-     
      // the div ids
      const titleId = 'title'+index;
      const synopsisId = 'synopsis'+index;
