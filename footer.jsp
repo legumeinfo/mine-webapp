@@ -44,19 +44,20 @@
 
   <!-- LIS/LegFed mines -->
   <div style="align:center; padding:5px;">
-    <a href="/phaseolusmine/begin.do" target="_blank">PhaseolusMine</a> |
-    <a href="/cicermine/begin.do" target="_blank">CicerMine</a> |
-    <a href="/vignamine/begin.do" target="_blank">VignaMine</a> |
-    <a href="/lupinmine/begin.do" target="_blank">LupinMine</a> |    
+    <a href="/legumemine/begin.do" target="_blank">LegumeMine</a> ||
     <a href="/arachismine/begin.do" target="_blank">ArachisMine</a> |
-    <a href="/soymine/begin.do" target="_blank">SoyMine</a> |
-    <a href="/medicmine/begin.do" target="_blank">MedicMine</a> |
-    <a href="/legumemine/begin.do" target="_blank">LegumeMine</a>
+    <a href="/cicermine/begin.do" target="_blank">CicerMine</a> |
+    <a href="/glycinemine/begin.do" target="_blank">GlycineMine</a> |
+    <a href="/lensmine/begin.do" target="_blank">LensMine</a> |
+    <a href="/lupinusmine/begin.do" target="_blank">LupinusMine</a> |    
+    <a href="/phaseolusmine/begin.do" target="_blank">PhaseolusMine</a> |
+    <a href="/vignamine/begin.do" target="_blank">VignaMine</a> |
+    <a href="/medicmine/begin.do" target="_blank">MedicMine</a>
   </div>
     
   <!-- copyright -->
   <div>
-    InterMine &copy; 2002 - 2020 Department of Genetics, University of Cambridge, Downing Street, Cambridge CB2 3EH, United Kingdom
+    InterMine &copy; 2002 - 2022 Department of Genetics, University of Cambridge, Downing Street, Cambridge CB2 3EH, United Kingdom
   </div>
 
 </div>
