@@ -20,6 +20,10 @@ java.util.Map<String,String> geneDescriptionMap = (java.util.Map<String,String>)
 if (sourceList==null || sourceList.size()==0) {
     return;
 }
+
+// server-side constants
+int WIDTH=1200;
+int HEIGHT=800;
 %>
 
 <h3>Expression Heat Maps (click to toggle)</h3>
@@ -46,7 +50,7 @@ if (sourceList==null || sourceList.size()==0) {
                 <option value="5">5</option>
             </select>
         </div>
-        <canvas id="canvasx<%=i%>" width="${WEB_PROPERTIES['heatmap.width']}" height="${WEB_PROPERTIES['heatmap.height']}"></canvas>
+        <canvas id="canvasx<%=i%>" width="<%=WIDTH%>" height="<%=HEIGHT%>"></canvas>
     </div>
     <script type="text/javascript">
         jQuery("#title<%=i%>").click(function() {
@@ -56,7 +60,21 @@ if (sourceList==null || sourceList.size()==0) {
 <% } %>
 
 <script type="text/javascript">
- // constants
+ // config properties
+ const heatmapIndicatorHeight = 50;
+ const heatmapIndicatorWidth = 500;
+ const varLabelScaleFontFactor = 1.2;
+ const varLabelFontColor = "black";
+ const varLabelFontStyle = "plain";
+ const varLabelRotate = 45;
+ const varTitleScaleFontFactor = 1.0;
+ const smpLabelScaleFontFactor = 1.2;
+ const smpLabelFontColor = "black";
+ const smpLabelFontStyle = "plain";
+ const smpLabelRotate = -45;
+ const smpTitleScaleFontFactor = 0.5;
+
+ // other constants
  const min_cluster = 5;
  const width_per_sample = 50;
  const height_per_gene = 50;
@@ -84,18 +102,18 @@ if (sourceList==null || sourceList.size()==0) {
      'heatmapCellBox': true,
      'heatmapIndicatorPosition': 'top',
      'heatmapIndicatorHistogram': false,
-     'heatmapIndicatorHeight': ${WEB_PROPERTIES['heatmap.heatmapIndicatorHeight']},
-     'heatmapIndicatorWidth': ${WEB_PROPERTIES['heatmap.heatmapIndicatorWidth']}, 
-     'varLabelScaleFontFactor': ${WEB_PROPERTIES['heatmap.varLabelScaleFontFactor']}, 
-     'varLabelFontColor': "${WEB_PROPERTIES['heatmap.varLabelFontColor']}", 
-     'varLabelFontStyle': "${WEB_PROPERTIES['heatmap.varLabelFontStyle']}", 
-     'varLabelRotate': ${WEB_PROPERTIES['heatmap.varLabelRotate']}, 
-     'varTitleScaleFontFactor': ${WEB_PROPERTIES['heatmap.varTitleScaleFontFactor']}, 
-     'smpLabelScaleFontFactor': ${WEB_PROPERTIES['heatmap.smpLabelScaleFontFactor']}, 
-     'smpLabelFontColor': "${WEB_PROPERTIES['heatmap.smpLabelFontColor']}", 
-     'smpLabelFontStyle': "${WEB_PROPERTIES['heatmap.smpLabelFontStyle']}", 
-     'smpLabelRotate': "${WEB_PROPERTIES['heatmap.smpLabelRotate']}", 
-     'smpTitleScaleFontFactor': ${WEB_PROPERTIES['heatmap.smpTitleScaleFontFactor']},
+     'heatmapIndicatorHeight': heatmapIndicatorHeight,
+     'heatmapIndicatorWidth': heatmapIndicatorWidth,
+     'varLabelScaleFontFactor': varLabelScaleFontFactor,
+     'varLabelFontColor': varLabelFontColor,
+     'varLabelFontStyle': varLabelFontStyle,
+     'varLabelRotate': varLabelRotate,
+     'varTitleScaleFontFactor': varTitleScaleFontFactor,
+     'smpLabelScaleFontFactor': smpLabelScaleFontFactor,
+     'smpLabelFontColor': smpLabelFontColor,
+     'smpLabelFontStyle': smpLabelFontStyle,
+     'smpLabelRotate': smpLabelRotate,
+     'smpTitleScaleFontFactor': smpTitleScaleFontFactor,
      'kmeansSmpClusters': 2,
      'kmeansVarClusters': 2,
      'linkage': 'complete',
