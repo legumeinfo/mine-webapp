@@ -26,6 +26,21 @@ int WIDTH=1200;
 int HEIGHT=800;
 %>
 
+<c:if test="${WEB_PROPERTIES['heatmap.debug'] == 'true'}">
+    <h3>expressionJSON</h3>
+    <code>
+        ${expressionJSON}
+    </code>
+    <h3>sourcesJSON</h3>
+    <code>
+        ${sourcesJSON}
+    </code>
+    <h3>descriptionsJSON</h3>
+    <code>
+        ${descriptionsJSON}
+    </code>
+</c:if>
+
 <h3>Expression Heat Maps (click to toggle)</h3>
 <% for (int i=0; i<sourceList.size(); i++) { %>
     <div style="clear:both; padding-top:5px;">
@@ -159,7 +174,7 @@ int HEIGHT=800;
          "click": function(o, e, t) {
              if (o.y && o.y.vars.length==1) {
                  const gene = o.y.vars[0];
-                 const url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+genePrimaryIDMap.get(gene);
+                 const url = "/${WEB_ROPPERTIES['webapp.path']}/gene:"+genePrimaryIDMap.get(gene);
                  window.open(url);
              }
          },
