@@ -174,7 +174,7 @@ int HEIGHT=800;
          "click": function(o, e, t) {
              if (o.y && o.y.vars.length==1) {
                  const gene = o.y.vars[0];
-                 const url = "/${WEB_ROPPERTIES['webapp.path']}/gene:"+genePrimaryIDMap.get(gene);
+                 const url = "/${WEB_PROPERTIES['webapp.path']}/gene:"+genePrimaryIDMap.get(gene);
                  window.open(url);
              }
          },
