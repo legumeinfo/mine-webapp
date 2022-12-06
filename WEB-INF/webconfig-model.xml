@@ -541,13 +541,6 @@
   <!-- report displayers -->
   <reportdisplayers>
 
-    <!-- can't use this since we have annotations other than GO terms -->
-    <!-- <reportdisplayer javaClass="org.ncgr.intermine.bio.web.displayer.GeneOntologyDisplayer" -->
-    <!--                  jspName="model/geneOntologyDisplayer.jsp" -->
-    <!--                  replacesFields="ontologyAnnotations" -->
-    <!--                  placement="summary" -->
-    <!--                  types="Gene"/> -->
-    
     <reportdisplayer javaClass="org.intermine.bio.web.displayer.GeneStructureDisplayer"
                      jspName="model/geneStructureDisplayer.jsp"
                      replacesFields="transcripts,exons,CDSs,introns,UTRs,fivePrimeUTR,threePrimeUTR"
