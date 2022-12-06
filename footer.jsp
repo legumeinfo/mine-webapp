@@ -52,7 +52,7 @@
     <a href="/lupinusmine/begin.do" target="_blank">LupinusMine</a> |    
     <a href="/phaseolusmine/begin.do" target="_blank">PhaseolusMine</a> |
     <a href="/vignamine/begin.do" target="_blank">VignaMine</a> |
-    <a href="/medicmine/begin.do" target="_blank">MedicMine</a>
+    <a href="/medicagomine/begin.do" target="_blank">MedicagoMine</a>
   </div>
     
   <!-- copyright -->
