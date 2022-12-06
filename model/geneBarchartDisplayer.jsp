@@ -31,6 +31,17 @@
 <c:forEach items="${sourcesJSON}" var="sourceJSON">
     <c:set var="sourcesExist" value="true" scope="page"/>
 
+    <c:if test="${WEB_PROPERTIES['geneBarchartDisplayer.debug'] == 'true'}">
+        <h3>sourceJSON</h3>
+        <code>
+            ${sourceJSON}
+        </code>
+        <h3>dataJSON</h3>
+        <code>
+            ${jsonList[index]};
+        </code>
+    </c:if>
+
     <h3 id="sourceIdentifier${index}"></h3>
     <div id="sourceSynopsis${index}"></div>
     <canvas id="canvasx${index}" width="${WEB_PROPERTIES['geneBarchartDisplayer.width']}" height="${WEB_PROPERTIES['geneBarchartDisplayer.height']}"></canvas>
