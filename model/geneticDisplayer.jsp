@@ -5,8 +5,14 @@
 <%@ page import="java.net.URLEncoder" language="java" %>
 <html:xhtml />
 <tiles:importAttribute />
-<c:set var="width" value="${WEB_PROPERTIES['geneticDisplayer.width']}"/>
-<c:set var="height" value="${WEB_PROPERTIES['geneticDisplayer.height']}"/>
+
+<c:if test="${WEB_PROPERTIES['geneticDisplayer.debug'] == 'true'}">
+    <h3>tracksJSON</h3>
+    <code>
+        ${tracksJSON}
+    </code>
+</c:if>
+
 <script type="text/javascript">
  var data = ${tracksJSON};
  var conf = {
@@ -34,7 +40,7 @@
  }
  var cx = new CanvasXpress("canvasx", data, conf, evts);
 </script>
-<canvas id="canvasx" width="${width}" height="${height}"></canvas>
+<canvas id="canvasx" width="${WEB_PROPERTIES['geneticDisplayer.width']}" height="${WEB_PROPERTIES['geneticDisplayer.height']}"></canvas>
 <!-- this br is required to prevent a scrollbar on the report page -->
 <br clear="all"/>
 <!-- /geneticDisplayer.jsp -->
