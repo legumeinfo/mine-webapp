@@ -161,9 +161,9 @@
   <!-- +bagdisplayer -->
   <!-- NOTE: MUST have Gene entry here so enrichment widgets work! -->
   <class className="org.intermine.model.bio.Gene">
-    <!-- <bagdisplayers> -->
-    <!--   <displayer src="heatMap.tile" showOnLeft="true"/> -->
-    <!-- </bagdisplayers> -->
+    <bagdisplayers>
+      <displayer src="heatMap.tile" showOnLeft="true"/>
+    </bagdisplayers>
   </class>
 
   <!-- extends SequenceFeature; needed for bagdisplayer -->
