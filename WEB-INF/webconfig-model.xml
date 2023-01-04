@@ -159,10 +159,11 @@
   </class>
 
   <!-- +bagdisplayer -->
+  <!-- NOTE: MUST have Gene entry here so enrichment widgets work! -->
   <class className="org.intermine.model.bio.Gene">
-    <bagdisplayers>
-      <displayer src="heatMap.tile" showOnLeft="true"/>
-    </bagdisplayers>
+    <!-- <bagdisplayers> -->
+    <!--   <displayer src="heatMap.tile" showOnLeft="true"/> -->
+    <!-- </bagdisplayers> -->
   </class>
 
   <!-- extends SequenceFeature; needed for bagdisplayer -->
@@ -647,7 +648,7 @@
                                title="Gene Ontology Enrichment"
                                description="GO terms enriched for items in this list."
                                label="GO Term"
-                               filterLabel="Namespace"
+                               filterLabel="Ontology"
                                filters="biological_process,cellular_component,molecular_function"
                                startClass="Gene"
                                typeClass="Gene"
@@ -655,12 +656,13 @@
                                enrich="ontologyAnnotations.ontologyTerm.name"
                                enrichIdentifier="ontologyAnnotations.ontologyTerm.identifier"
                                constraints="ontologyAnnotations.ontologyTerm.ontology.name=Gene Ontology,
-                                            ontologyAnnotations.ontologyTerm.namespace=[Namespace],
+                                            ontologyAnnotations.ontologyTerm.namespace=[Ontology],
                                             organism.name=[list]"
                                views="primaryIdentifier, name, organism.name,
                                       ontologyAnnotations.ontologyTerm.identifier, ontologyAnnotations.ontologyTerm.name"
-                               externalLink="http://amigo.geneontology.org/amigo/term/"/>
-
+                               externalLink="http://amigo.geneontology.org/amigo/term/"
+                               correctionCoefficient="org.intermine.bio.web.widget.GeneLengthCorrectionCoefficient"/>
+    
     <enrichmentwidgetdisplayer id="genefamily_enrichment"
                                title="Gene Family Enrichment"
                                description="Gene families enriched for genes in this list."
