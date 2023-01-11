@@ -2,6 +2,11 @@
 <webconfig>
 
   <class className="org.intermine.model.bio.Author">
+    <headerconfig>
+      <titles>
+        <title mainTitles="name" numberOfMainTitlesToShow="1"/>
+       </titles>
+    </headerconfig>
     <fields>
       <fieldconfig fieldExpr="name"/>
     </fields>
@@ -417,14 +422,13 @@
       <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
       <fieldconfig fieldExpr="description" label="Description"/>
       <fieldconfig fieldExpr="genotypes" label="Genotypes"/>
-      <fieldconfig fieldExpr="geneticMap.primaryIdentifier" label="Genetic Map"/>
     </fields>
   </class>
 
   <class className="org.intermine.model.bio.QTL">
     <headerconfig>
       <titles>
-        <title mainTitles="identifier" numberOfMainTitlesToShow="1" />
+        <title mainTitles="identifier|linkageGroup.identifier|linkageGroup.geneticMap.primaryIdentifier" numberOfMainTitlesToShow="3" />
       </titles>
     </headerconfig>
     <fields>
@@ -450,17 +454,18 @@
       <fieldconfig fieldExpr="geoSeries" label="NCBI GEO Accession"/>
       <fieldconfig fieldExpr="bioProject" label="NCBI BioProject"/>
       <fieldconfig fieldExpr="sra" label="NCBI SRA"/>
+      <fieldconfig fieldExpr="unit" label="Unit"/>
     </fields>
   </class>
 
   <class className="org.intermine.model.bio.ExpressionSample">
     <headerconfig>
       <titles>
-        <title mainTitles="identifier" numberofMainTitlesToShow="1"/>
+        <title mainTitles="name|primaryIdentifier" numberOfMainTitlesToShow="2"/>
       </titles>
     </headerconfig>
     <fields>
-      <fieldconfig fieldExpr="identifier" label="Identifier"/>
+      <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
       <fieldconfig fieldExpr="name" label="Name"/>
       <fieldconfig fieldExpr="tissue" label="Tissue"/>
       <fieldconfig fieldExpr="description" label="Description" doNotTruncate="true"/>
@@ -472,11 +477,10 @@
 
   <class className="org.intermine.model.bio.ExpressionValue">
     <fields>
-      <fieldconfig fieldExpr="expressionSample.source.identifier" label="Source"/>
+      <fieldconfig fieldExpr="expressionSample.source.primaryIdentifier" label="Source"/>
       <fieldconfig fieldExpr="expressionSample.primaryIdentifier" label="Sample ID"/>
       <fieldconfig fieldExpr="expressionSample.description" label="Sample Description"/>
       <fieldconfig fieldExpr="value" label="Value"/>
-      <fieldconfig fieldExpr="unit" label="Unit"/>
     </fields>
   </class>
   
@@ -512,7 +516,7 @@
   <class className="org.intermine.model.bio.Trait">
     <headerconfig>
       <titles>
-        <title mainTitles="name" numberOfMainTitlesToShow="1"/>
+        <title mainTitles="name|qtlStudy.primaryIdentifier|gwas.primaryIdentifier" numberOfMainTitlesToShow="3"/>
       </titles>
     </headerconfig>
     <fields>
