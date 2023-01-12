@@ -394,7 +394,13 @@
   </class>
 
   <class className="org.intermine.model.bio.LinkageGroupPosition">
+    <headerconfig>
+      <titles>
+        <title mainTitles="position|linkageGroup.identifier" numberOfMainTitlesToShow="2" subTitles="linkageGroup.geneticMap.primaryIdentifier"/>
+      </titles>
+    </headerconfig>
     <fields>
+      <fieldconfig fieldExpr="markerName" label="Marker"/>
       <fieldconfig fieldExpr="position" label="Position (cM)"/>
       <fieldconfig fieldExpr="linkageGroup.identifier" label="Linkage Group"/>
     </fields>
