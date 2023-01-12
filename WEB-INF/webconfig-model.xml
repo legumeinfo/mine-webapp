@@ -444,6 +444,7 @@
       <fieldconfig fieldExpr="linkageGroup.identifier" label="Linkage Group"/>
       <fieldconfig fieldExpr="start" />
       <fieldconfig fieldExpr="end" />
+      <fieldconfig fieldExpr="markerNames" label="Markers"/>
       <fieldconfig fieldExpr="qtlStudy.primaryIdentifier" label="QTL Study"/>
     </fields>
   </class>
