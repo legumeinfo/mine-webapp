@@ -9,8 +9,9 @@
 <!-- static canvasXpress configuration -->
 <script type="text/javascript">
  var conf = {
-     "axisAlgorithm": "wilkinson",
      "graphOrientation": "vertical",
+     "axisAlgorithm": "wilkinson",
+     "setMinX": 0.0,
      "marginTop": 100,
      "axisMinMaxTickTickWidth": false,
      "axisTickScaleFontFactor": 1,
