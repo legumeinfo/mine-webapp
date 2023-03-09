@@ -388,6 +388,7 @@
     </headerconfig>
     <fields>
       <fieldconfig fieldExpr="identifier"/>
+      <fieldconfig fieldExpr="primaryIdentifier" label="Full Identifier"/>
       <fieldconfig fieldExpr="length" label="Length (cM)"/>
       <fieldconfig fieldExpr="number"/>
       <fieldconfig fieldExpr="geneticMap.primaryIdentifier" label="Genetic Map"/>
@@ -443,6 +444,7 @@
     </headerconfig>
     <fields>
       <fieldconfig fieldExpr="identifier"/>
+      <fieldconfig fieldExpr="primaryIdentifier" label="Full Identifier"/>
       <fieldconfig fieldExpr="trait.name" label="Trait"/>
       <fieldconfig fieldExpr="linkageGroup.geneticMap.primaryIdentifier" label="Genetic Map"/>
       <fieldconfig fieldExpr="linkageGroup.identifier" label="Linkage Group"/>
