@@ -58,6 +58,17 @@
     </fields>
   </class>
 
+  <class className="org.intermine.model.bio.CrossReference">
+    <headerconfig>
+      <titles>
+        <title mainTitles="identifier"/>
+       </titles>
+    </headerconfig>
+    <fields>
+      <fieldconfig fieldExpr="identifier"/>
+    </fields>
+  </class>
+
   <!-- +assemblyVersion -->
   <class className="org.intermine.model.bio.Chromosome">
     <headerconfig>
@@ -158,6 +169,11 @@
   </class>
 
   <class className="org.intermine.model.bio.Location">
+    <headerconfig>
+      <titles>
+        <title mainTitles="feature.primaryIdentifier"/>
+      </titles>
+    </headerconfig>
     <fields>
       <fieldconfig fieldExpr="feature.primaryIdentifier" label="Feature"/>
       <fieldconfig fieldExpr="locatedOn.primaryIdentifier" label="Located On"/>
@@ -263,6 +279,11 @@
   </class>
 
   <class className="org.intermine.model.bio.OntologyTermSynonym">
+    <headerconfig>
+      <titles>
+        <title mainTitles="name"/>
+      </titles>
+    </headerconfig>
     <fields>
       <fieldconfig fieldExpr="name"/>
       <fieldconfig fieldExpr="type"/>
@@ -527,12 +548,13 @@
   <class className="org.intermine.model.bio.Trait">
     <headerconfig>
       <titles>
-        <title mainTitles="name|qtlStudy.primaryIdentifier|gwas.primaryIdentifier" numberOfMainTitlesToShow="3"/>
+        <title mainTitles="name"/>
       </titles>
     </headerconfig>
     <fields>
       <fieldconfig fieldExpr="name"/>
       <fieldconfig fieldExpr="description"/>
+      <fieldconfig fieldExpr="primaryIdentifier"/>
       <fieldconfig fieldExpr="qtlStudy.primaryIdentifier" label="QTL Study"/>
       <fieldconfig fieldExpr="gwas.primaryIdentifier" label="GWAS"/>
     </fields>
