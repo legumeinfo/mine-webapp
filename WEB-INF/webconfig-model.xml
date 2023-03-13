@@ -352,7 +352,17 @@
       <fieldconfig fieldExpr="score" label="Assignment Score"/>
     </fields>
   </class>
-
+  
+  <class className="org.intermine.model.bio.GeneFamilyTally">
+    <fields>
+      <fieldconfig fieldExpr="geneFamily.primaryIdentifier" label="Gene Family"/>
+      <fieldconfig fieldExpr="organism.name" label="Organism"/>
+      <fieldconfig fieldExpr="numAnnotations" label="Number of Annotations"/>
+      <fieldconfig fieldExpr="totalCount" label="Total Number of Genes"/>
+      <fieldconfig fieldExpr="averageCount" label="Average Number of Genes"/>
+    </fields>
+  </class>
+  
   <class className="org.intermine.model.bio.Phylotree">
     <headerconfig>
       <titles>
