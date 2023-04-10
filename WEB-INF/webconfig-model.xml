@@ -374,6 +374,14 @@
     </fields>
   </class>
 
+  <class className="org.intermine.model.bio.GeneFamilyTally">
+    <fields>
+      <fieldconfig fieldExpr="organism.name" label="Organism"/>
+      <fieldconfig fieldExpr="tally" label="Tally"/>
+      <fieldconfig fieldExpr="geneFamily.primaryIdentifier" label="Gene Family"/>
+    </fields>
+  </class>
+
   <class className="org.intermine.model.bio.Phylotree">
     <headerconfig>
       <titles>
