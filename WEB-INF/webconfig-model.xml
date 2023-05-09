@@ -194,7 +194,6 @@
     <fields>
       <fieldconfig fieldExpr="name"/>
       <fieldconfig fieldExpr="type"/>
-      <fieldconfig fieldExpr="genotypingPlatform"/>
       <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
       <fieldconfig fieldExpr="organism.name" label="Organism"/>
       <fieldconfig fieldExpr="strain.identifier" label="Strain"/>
@@ -516,7 +515,7 @@
     <fields>
       <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
       <fieldconfig fieldExpr="synopsis" label="Synopsis"/>
-      <fieldconfig fieldExpr="genotypingPlatform" label="Genotyping Platform"/>
+      <fieldconfig fieldExpr="genotypingPlatform.primaryIdentifier" label="Genotyping Platform"/>
       <fieldconfig fieldExpr="genotypes" label="Genotypes"/>
       <fieldconfig fieldExpr="description" label="Description" doNotTruncate="true"/>
     </fields>
