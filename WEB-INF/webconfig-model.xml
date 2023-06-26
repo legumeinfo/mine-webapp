@@ -343,6 +343,9 @@
       <fieldconfig fieldExpr="description" label="Description" doNotTruncate="true"/>
       <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
     </fields>
+    <bagdisplayers>
+      <displayer src="geneFamilyWidget.tile" showOnLeft="true"/>
+    </bagdisplayers>
   </class>
 
   <class className="org.intermine.model.bio.GeneFamilyAssignment">

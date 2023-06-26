@@ -80,12 +80,10 @@ int HEIGHT=800;
  const heatmapIndicatorWidth = 500;
  const varLabelScaleFontFactor = 1.2;
  const varLabelFontColor = "black";
- const varLabelFontStyle = "plain";
  const varLabelRotate = 45;
  const varTitleScaleFontFactor = 1.0;
  const smpLabelScaleFontFactor = 1.2;
  const smpLabelFontColor = "black";
- const smpLabelFontStyle = "plain";
  const smpLabelRotate = -45;
  const smpTitleScaleFontFactor = 0.5;
 
@@ -121,12 +119,10 @@ int HEIGHT=800;
      'heatmapIndicatorWidth': heatmapIndicatorWidth,
      'varLabelScaleFontFactor': varLabelScaleFontFactor,
      'varLabelFontColor': varLabelFontColor,
-     'varLabelFontStyle': varLabelFontStyle,
      'varLabelRotate': varLabelRotate,
      'varTitleScaleFontFactor': varTitleScaleFontFactor,
      'smpLabelScaleFontFactor': smpLabelScaleFontFactor,
      'smpLabelFontColor': smpLabelFontColor,
-     'smpLabelFontStyle': smpLabelFontStyle,
      'smpLabelRotate': smpLabelRotate,
      'smpTitleScaleFontFactor': smpTitleScaleFontFactor,
      'kmeansSmpClusters': 2,
