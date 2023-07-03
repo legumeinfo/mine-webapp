@@ -395,11 +395,11 @@
   <class className="org.intermine.model.bio.LinkageGroup">
     <headerconfig>
       <titles>
-        <title mainTitles="identifier" numberOfMainTitlesToShow="1" subTitles="geneticMap.primaryIdentifier"/>
+        <title mainTitles="name" numberOfMainTitlesToShow="1" subTitles="geneticMap.primaryIdentifier"/>
       </titles>
     </headerconfig>
     <fields>
-      <fieldconfig fieldExpr="identifier"/>
+      <fieldconfig fieldExpr="name"/>
       <fieldconfig fieldExpr="primaryIdentifier" label="Full Identifier"/>
       <fieldconfig fieldExpr="length" label="Length (cM)"/>
       <fieldconfig fieldExpr="number"/>
@@ -451,11 +451,11 @@
   <class className="org.intermine.model.bio.QTL">
     <headerconfig>
       <titles>
-        <title mainTitles="identifier|linkageGroup.identifier|linkageGroup.geneticMap.primaryIdentifier" numberOfMainTitlesToShow="3" />
+        <title mainTitles="name|linkageGroup.name|linkageGroup.geneticMap.primaryIdentifier" numberOfMainTitlesToShow="3" />
       </titles>
     </headerconfig>
     <fields>
-      <fieldconfig fieldExpr="identifier"/>
+      <fieldconfig fieldExpr="name"/>
       <fieldconfig fieldExpr="primaryIdentifier" label="Full Identifier"/>
       <fieldconfig fieldExpr="trait.name" label="Trait"/>
       <fieldconfig fieldExpr="linkageGroup.geneticMap.primaryIdentifier" label="Genetic Map"/>
