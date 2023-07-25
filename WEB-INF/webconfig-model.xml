@@ -400,7 +400,7 @@
     </headerconfig>
     <fields>
       <fieldconfig fieldExpr="name"/>
-      <fieldconfig fieldExpr="primaryIdentifier" label="Full Identifier"/>
+      <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
       <fieldconfig fieldExpr="length" label="Length (cM)"/>
       <fieldconfig fieldExpr="number"/>
       <fieldconfig fieldExpr="geneticMap.primaryIdentifier" label="Genetic Map"/>
@@ -413,13 +413,13 @@
   <class className="org.intermine.model.bio.LinkageGroupPosition">
     <headerconfig>
       <titles>
-        <title mainTitles="position|linkageGroup.identifier" numberOfMainTitlesToShow="2" subTitles="linkageGroup.geneticMap.primaryIdentifier"/>
+        <title mainTitles="position|linkageGroup.primaryIdentifier" numberOfMainTitlesToShow="2" subTitles="linkageGroup.geneticMap.primaryIdentifier"/>
       </titles>
     </headerconfig>
     <fields>
       <fieldconfig fieldExpr="markerName" label="Marker"/>
       <fieldconfig fieldExpr="position" label="Position (cM)"/>
-      <fieldconfig fieldExpr="linkageGroup.identifier" label="Linkage Group"/>
+      <fieldconfig fieldExpr="linkageGroup.primaryIdentifier" label="Linkage Group"/>
     </fields>
   </class>
 
@@ -431,6 +431,7 @@
     </headerconfig>
     <fields>
       <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
+      <fieldconfig fieldExpr="genotypingPlatform.primaryIdentifier" label="Genotyping Platform"/>
       <fieldconfig fieldExpr="description" label="Description" doNotTruncate="true"/>
     </fields>
   </class>
@@ -456,10 +457,10 @@
     </headerconfig>
     <fields>
       <fieldconfig fieldExpr="name"/>
-      <fieldconfig fieldExpr="primaryIdentifier" label="Full Identifier"/>
+      <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
       <fieldconfig fieldExpr="trait.name" label="Trait"/>
       <fieldconfig fieldExpr="linkageGroup.geneticMap.primaryIdentifier" label="Genetic Map"/>
-      <fieldconfig fieldExpr="linkageGroup.identifier" label="Linkage Group"/>
+      <fieldconfig fieldExpr="linkageGroup.primaryIdentifier" label="Linkage Group"/>
       <fieldconfig fieldExpr="start" />
       <fieldconfig fieldExpr="end" />
       <fieldconfig fieldExpr="markerNames" label="Markers"/>
