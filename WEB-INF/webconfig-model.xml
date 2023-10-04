@@ -386,7 +386,6 @@
     <fields>
       <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
       <fieldconfig fieldExpr="name"/>
-      <fieldconfig fieldExpr="stableIdentifier" label="Stable Identifier"/>
     </fields>
   </class>
 

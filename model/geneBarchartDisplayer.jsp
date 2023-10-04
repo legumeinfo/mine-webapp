@@ -20,7 +20,10 @@
      "smpTitleFontStyle": "italic",
      "smpTitleScaleFontFactor": 0.5,
      "smpTitle": "Mouse over bar for full sample description",
-     "legendPosition": "right",
+     "legendPosition": "${WEB_PROPERTIES['geneBarchartDisplayer.legendPosition']}",
+     "legendTitleFontSize": ${WEB_PROPERTIES['geneBarchartDisplayer.legendTitleFontSize']},
+     "legendTextFontSize": ${WEB_PROPERTIES['geneBarchartDisplayer.legendTextFontSize']},
+     "legendColumns": ${WEB_PROPERTIES['geneBarchartDisplayer.legendColumns']},
      "colorScheme": "CanvasXpress",
      "colorBy": "repgroup"
  }
