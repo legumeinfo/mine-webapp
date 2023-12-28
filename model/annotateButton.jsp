@@ -4,9 +4,9 @@
 try {
     // Display the ANNOTATE button to send the sequence to the annotate URL
     Integer objectId = Integer.parseInt(request.getParameter("id"));
-    // create the FASTA using SequenceAnnotateUtil
+    // create the FASTA using SequenceAnnotateUtil (getBioSequence() will be null if not an appropriate object type)
     SequenceAnnotateUtil sequenceAnnotateUtil = new SequenceAnnotateUtil(request, objectId);
-    if (sequenceAnnotateUtil.getBioSequence()!=null) {
+    if (sequenceAnnotateUtil.getBioSequence() != null) {
         for (String identifier : sequenceAnnotateUtil.getGeneFamilyIdentifiers()) {
             // only show for LIS gene families
             if (identifier.startsWith("legfed")) {
