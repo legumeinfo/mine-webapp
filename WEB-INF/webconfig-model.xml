@@ -106,19 +106,27 @@
     </bagdisplayers>
   </class>
 
-  <!-- +bagdisplayer -->
+  <!-- MRNA.description is null +bagdisplayer -->
   <class className="org.intermine.model.bio.MRNA">
+    <fields>
+      <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
+      <fieldconfig fieldExpr="name" label="Name"/>
+      <fieldconfig fieldExpr="assemblyVersion" label="Assembly"/>
+      <fieldconfig fieldExpr="annotationVersion" label="Annotation"/>
+      <fieldconfig fieldExpr="length" displayer="model/sequenceShortDisplayerWithField.jsp" showInInlineCollection="true" showInSummary="true"/>
+      <fieldconfig fieldExpr="organism.name" label="Organism"/>
+      <fieldconfig fieldExpr="strain.identifier" label="Strain"/>
+    </fields>
     <bagdisplayers>
       <displayer src="annotation.tile" showOnLeft="true"/>
     </bagdisplayers>
   </class>
 
-  <!-- +length +bagdisplayer -->
+  <!-- -description +length +bagdisplayer -->
   <class className="org.intermine.model.bio.Protein">
     <fields>
       <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
       <fieldconfig fieldExpr="name" label="Name"/>
-      <fieldconfig fieldExpr="description"/>
       <fieldconfig fieldExpr="organism.name" label="Organism"/>
       <fieldconfig fieldExpr="strain.identifier" label="Strain"/>
       <fieldconfig fieldExpr="length"/>
@@ -211,7 +219,7 @@
     </headerconfig>
     <fields>
       <fieldconfig fieldExpr="name"/>
-      <fieldconfig fieldExpr="primaryIdentifier" label="InterPro"/>
+      <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
       <fieldconfig fieldExpr="type"/>
       <fieldconfig fieldExpr="description"/>
     </fields>
@@ -386,7 +394,6 @@
     <fields>
       <fieldconfig fieldExpr="primaryIdentifier" label="Identifier"/>
       <fieldconfig fieldExpr="name"/>
-      <fieldconfig fieldExpr="stableIdentifier" label="Stable Identifier"/>
     </fields>
   </class>
 
