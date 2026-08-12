@@ -8,8 +8,10 @@ try {
     SequenceAnnotateUtil sequenceAnnotateUtil = new SequenceAnnotateUtil(request, objectId);
     if (sequenceAnnotateUtil.getBioSequence() != null) {
         for (String identifier : sequenceAnnotateUtil.getGeneFamilyIdentifiers()) {
+            if (true) {
+            // leaving this vestige in case we decide to force use of newer families (ie changing the value to legume.fam3)
             // only show for LIS gene families
-            if (identifier.startsWith("legfed")) {
+            //if (identifier.startsWith("legfed")) {
 %>
     <form class="small-button" action="${WEB_PROPERTIES['annotate.url']}" method="post" target="_blank">
         <input type="hidden" name="fasta" value="<%=sequenceAnnotateUtil.getFasta()%>" />
