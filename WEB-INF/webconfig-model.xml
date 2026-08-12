@@ -510,9 +510,9 @@
 
   <class className="org.intermine.model.bio.ExpressionValue">
     <fields>
-      <fieldconfig fieldExpr="expressionSample.source.primaryIdentifier" label="Source"/>
-      <fieldconfig fieldExpr="expressionSample.primaryIdentifier" label="Sample ID"/>
-      <fieldconfig fieldExpr="expressionSample.description" label="Sample Description"/>
+      <fieldconfig fieldExpr="sample.source.primaryIdentifier" label="Source"/>
+      <fieldconfig fieldExpr="sample.primaryIdentifier" label="Sample ID"/>
+      <fieldconfig fieldExpr="sample.description" label="Sample Description"/>
       <fieldconfig fieldExpr="value" label="Value"/>
     </fields>
   </class>
